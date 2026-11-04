@@ -3,568 +3,615 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Little Lookbook</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colorful Days</title>
 <style>
 :root {
-  --cream:#f7f1e8;
-  --paper:#fffaf3;
-  --beige:#e8dccd;
-  --tan:#c9b49e;
-  --brown:#786352;
-  --dark:#554638;
-  --pink:#ead5d1;
-  --sage:#dce3d5;
-  --blue:#dce5e9;
-  --shadow:0 8px 25px #78635212;
+  --cream:#faf5ec;--paper:#fffdf8;--beige:#e9ddce;
+  --brown:#796653;--ink:#51483f;--pink:#efd9d6;
+  --sage:#dfe8d8;--blue:#dce8ed;--orange:#efbd8c;
 }
 *{box-sizing:border-box}
-body {
-  margin:0;
-  background:var(--cream);
-  color:var(--dark);
-  font-family:Georgia,"Times New Roman",serif;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:17px 5%;background:#fffaf3;border-bottom:1px solid #e9dfd3;
-  position:sticky;top:0;z-index:5;
-}
-.logo{font-size:23px;letter-spacing:1px;font-weight:bold}
-.logo span{color:#b18e7d}
-.nav{display:flex;gap:9px;flex-wrap:wrap}
-.nav button,.soft-button{
-  border:1px solid #dfd1c1;background:#f7f1e8;color:var(--dark);
-  padding:9px 15px;border-radius:22px;font-size:13px;
-}
-.nav button:hover,.soft-button:hover{background:var(--pink)}
-.page{display:none;max-width:1200px;margin:auto;padding:35px 5% 65px}
-.page.active{display:block}
-h1,h2,h3{font-weight:normal}
-h1{font-size:clamp(34px,6vw,58px);margin:0 0 12px}
-h2{font-size:29px;margin:0 0 12px}
-p{line-height:1.6}
-.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:11px;color:#a58a76}
-.home-hero{
-  min-height:510px;border-radius:28px;background:#eee2d5;
-  display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;
-  box-shadow:var(--shadow);
-}
-.hero-copy{padding:65px 9%;align-self:center}
-.hero-copy p{max-width:370px;color:#786b60}
-.primary{
-  border:0;background:#9d806d;color:white;border-radius:24px;
-  padding:14px 25px;margin-top:13px;transition:.2s;
-}
-.primary:hover{background:#806452;transform:translateY(-2px)}
-.hero-art{display:flex;align-items:center;justify-content:center;background:#e5d8c9}
-.hero-art svg{width:min(100%,370px);height:430px}
-.home-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
-.info-card{background:var(--paper);padding:22px;border-radius:19px;border:1px solid #eee4d9}
-.info-card h3{margin:0 0 8px;font-size:19px}
-.dress-layout{display:grid;grid-template-columns:minmax(270px,.85fr) minmax(340px,1.15fr);gap:25px;align-items:start}
-.character-panel{
-  background:#eadfd2;border-radius:24px;padding:18px;position:sticky;top:85px;
-}
-.character-stage{
-  background:#f8f0e6;border-radius:18px;min-height:560px;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-}
-#character{width:100%;max-width:360px;height:550px}
-.stage-caption{text-align:center;font-size:12px;color:#927e6d;padding:12px 0 2px}
-.closet{background:var(--paper);border:1px solid #eee4d9;border-radius:24px;padding:20px}
-.closet-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.tabs{display:flex;gap:7px;overflow-x:auto;padding:14px 0;scrollbar-width:thin}
-.tab{
-  flex-shrink:0;border:1px solid #e3d7ca;background:#f8f2eb;
-  border-radius:18px;padding:9px 13px;font-size:12px;color:var(--dark);
-}
-.tab.selected{background:#ddc9b9;border-color:#c6ad99}
-.item-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
-.item{
-  border:1px solid #eee2d6;background:#faf5ee;border-radius:14px;
-  min-height:94px;padding:10px 5px;color:var(--dark);font-size:12px;
-}
-.item:hover,.item.chosen{border:2px solid #ad8d78;background:#f0e3d8}
-.item-swatch{width:35px;height:35px;border-radius:50%;margin:0 auto 8px;border:1px solid #00000012}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
-.small-button{border:1px solid #ddcfc0;background:#f7f0e8;padding:9px 12px;border-radius:18px;font-size:12px;color:var(--dark)}
-.small-button:hover{background:var(--pink)}
-.section-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#9b8370;margin:22px 0 9px}
-.color-row{display:flex;gap:9px;flex-wrap:wrap}
-.color-dot{width:29px;height:29px;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px #d8c9b9}
-.color-dot.selected{box-shadow:0 0 0 2px #806452}
-.photo-layout{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
-.photo-card{
-  background:#e8dccd;padding:22px;border-radius:25px;text-align:center;
-}
-.photo-frame{
-  background:#fffaf3;border:10px solid #fffaf3;outline:1px solid #d8c8b7;
-  border-radius:5px;max-width:360px;margin:auto;overflow:hidden;
-}
-.photo-frame svg{display:block;width:100%;height:auto}
-.photo-details{background:var(--paper);padding:25px;border-radius:22px}
-input{
-  width:100%;padding:13px;border:1px solid #ddcfc0;border-radius:12px;
-  background:#fffaf5;color:var(--dark);margin:9px 0 14px;outline:none;
-}
-input:focus{border-color:#a58a76}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;margin-top:25px}
-.gallery-card{background:var(--paper);padding:12px;border-radius:17px;border:1px solid #eee3d8}
-.gallery-image{background:#eee3d8;border-radius:11px;overflow:hidden;cursor:pointer}
-.gallery-image img{width:100%;display:block}
-.gallery-card h3{font-size:17px;margin:11px 3px 7px}
-.gallery-actions{display:flex;gap:7px;flex-wrap:wrap}
-.empty{text-align:center;padding:65px 20px;background:var(--paper);border-radius:20px;color:#988675}
-.empty p{max-width:350px;margin:10px auto}
-.footer{text-align:center;padding:25px;color:#a08c7b;font-size:12px}
-@media(max-width:760px){
- .topbar{padding:13px 4%;align-items:flex-start;gap:10px;flex-direction:column}
- .page{padding:25px 4% 45px}
- .home-hero{grid-template-columns:1fr}
- .hero-copy{padding:40px 8% 20px}
- .hero-art{min-height:300px}
- .hero-art svg{height:300px}
- .home-bottom{grid-template-columns:1fr}
- .dress-layout{grid-template-columns:1fr}
- .character-panel{position:static}
- .character-stage{min-height:460px}
- #character{height:460px}
- .photo-layout{grid-template-columns:1fr}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,serif}
+button{font:inherit;cursor:pointer}
+header{background:var(--paper);padding:16px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9dfd2;gap:15px;flex-wrap:wrap}
+.logo{font-size:24px;letter-spacing:1px}
+.logo span{color:#bd9780}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+button{color:var(--ink)}
+nav button,.soft{background:#f5eee5;border:1px solid #e5d8c9;border-radius:20px;padding:9px 15px;font-size:13px}
+nav button.active,.soft.active{background:#e9d5c9}
+main{max-width:1250px;margin:auto;padding:25px 4% 55px}
+h1{font-size:clamp(34px,6vw,55px);font-weight:normal;margin:0 0 8px}
+h2{font-weight:normal;margin:0 0 10px}
+p{line-height:1.55}
+.intro{max-width:600px;color:#8b7968}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.primary{background:#987d68;color:white;border:0;border-radius:22px;padding:12px 20px}
+.primary:hover{background:#79614e}
+.soft:hover{background:var(--pink)}
+#home{display:block}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;background:#eee3d6;border-radius:25px;padding:35px;margin:20px 0 25px}
+.hero-art{background:#f8f1e8;border-radius:20px;padding:20px;text-align:center}
+.hero-art svg{width:100%;max-width:400px;height:260px}
+.collection-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.collection{padding:25px;border-radius:20px;border:1px solid #e7dbce;background:var(--paper)}
+.collection:nth-child(2){background:#f5e9e5}
+.collection h2{font-size:25px}
+.collection p{color:#8b7968}
+.collection button{margin-top:8px}
+#studio{display:none}
+.studio-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;align-items:start}
+.drawing-panel{background:var(--paper);border:1px solid #e9dfd2;border-radius:20px;padding:16px}
+.drawing-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+#art{width:100%;height:auto;display:block;background:#fffdf8;border:1px solid #e8ded2;border-radius:12px;touch-action:manipulation}
+.region{fill:#fffdf8;stroke:#51483f;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;cursor:pointer}
+.region:hover{filter:brightness(.96)}
+.line{fill:none;stroke:#51483f;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.detail{fill:none;stroke:#51483f;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.panel{background:var(--paper);border:1px solid #e9dfd2;border-radius:20px;padding:17px}
+.panel h3{font-weight:normal;margin:4px 0 12px;font-size:20px}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.swatch{aspect-ratio:1;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px #d8cbbc}
+.swatch.selected{box-shadow:0 0 0 2px #796653}
+.tool-list{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 18px}
+.tool-list button{font-size:12px}
+.hint{font-size:12px;color:#998775;line-height:1.5}
+.page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:13px;margin-top:20px}
+.page-card{background:var(--paper);border:1px solid #e9dfd2;border-radius:14px;padding:9px;text-align:left}
+.page-card:hover{border-color:#b99d85;transform:translateY(-2px)}
+.page-card svg{width:100%;height:auto;display:block;background:white;border-radius:9px}
+.page-card span{display:block;padding:8px 2px 2px;font-size:13px}
+.page-card small{color:#a18b77}
+#gallery{display:none}
+#browse{display:none}
+.empty{text-align:center;padding:45px;background:var(--paper);border-radius:18px;color:#998775}
+.footer{text-align:center;padding:25px;color:#a18f7d;font-size:12px}
+@media(max-width:800px){
+ .hero{grid-template-columns:1fr;padding:23px}
+ .studio-layout{grid-template-columns:1fr}
+ .panel{order:-1}
+ .palette{grid-template-columns:repeat(8,1fr)}
 }
 </style>
 </head>
 <body>
-
-<header class="topbar">
-  <div class="logo">little <span>lookbook</span></div>
-  <nav class="nav">
-    <button onclick="go('home')">Home</button>
-    <button onclick="go('dress')">Dress up</button>
-    <button onclick="go('gallery')">My gallery</button>
+<header>
+  <div class="logo">colorful <span>days</span></div>
+  <nav>
+    <button id="navHome" class="active" onclick="showPage('home')">Home</button>
+    <button id="navBrowse" onclick="showPage('browse')">Coloring pages</button>
+    <button id="navGallery" onclick="showPage('gallery')">My gallery</button>
   </nav>
 </header>
 
 <main>
-<section id="home" class="page active">
-  <div class="home-hero">
-    <div class="hero-copy">
-      <div class="eyebrow">Your own little fashion studio</div>
-      <h1>Find your<br><span style="color:#a78672">little look.</span></h1>
-      <p>Create outfits, try new styles, and save your favorite looks in your own personal lookbook.</p>
-      <button class="primary" onclick="go('dress')">Start dressing up</button>
-      <button class="soft-button" onclick="go('gallery')">Open my gallery</button>
+<section id="home">
+  <div class="eyebrow">A little creative time</div>
+  <h1>Your coloring corner.</h1>
+  <p class="intro">Pick a page, choose your colors, and make every illustration your own.</p>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">50 illustrated pages</div>
+      <h2 style="font-size:34px">Make something<br>colorful today.</h2>
+      <p>Explore cozy everyday scenes and festive Christmas illustrations. Every page has its own little world to color.</p>
+      <button class="primary" onclick="showPage('browse')">Explore all pages</button>
     </div>
-    <div class="hero-art" id="homeCharacter"></div>
+    <div class="hero-art" id="heroArt"></div>
   </div>
-  <div class="home-bottom">
-    <div class="info-card"><h3>01. Create</h3><p>Customize your character and make outfits from your closet.</p></div>
-    <div class="info-card"><h3>02. Capture</h3><p>Take a little picture of your finished look and give it a name.</p></div>
-    <div class="info-card"><h3>03. Collect</h3><p>Keep all your favorite outfits together in your gallery.</p></div>
-  </div>
-</section>
-
-<section id="dress" class="page">
-  <div class="eyebrow">The dressing room</div>
-  <h2>Create a new look</h2>
-  <p>Pick your favorite pieces and make the outfit your own.</p>
-  <div class="dress-layout">
-    <div class="character-panel">
-      <div class="character-stage" id="stage">
-        <svg id="character" viewBox="0 0 360 620" role="img" aria-label="Your fashion character"></svg>
-      </div>
-      <div class="stage-caption">Your character · full outfit view</div>
-      <div class="controls">
-        <button class="small-button" onclick="randomOutfit()">Random outfit</button>
-        <button class="small-button" onclick="resetOutfit()">Reset outfit</button>
-        <button class="small-button" onclick="go('photo')">Save this look</button>
-      </div>
+  <div class="collection-grid">
+    <div class="collection">
+      <div class="eyebrow">Collection one</div>
+      <h2>Everyday moments</h2>
+      <p>25 cozy scenes, cute animals, shops, gardens, little adventures, and more.</p>
+      <button class="primary" onclick="filterCollection('everyday')">Explore everyday</button>
     </div>
-    <div class="closet">
-      <div class="closet-head">
-        <div><div class="eyebrow">Your wardrobe</div><h2 style="font-size:24px">The closet</h2></div>
-        <button class="small-button" onclick="go('photo')">Save look</button>
-      </div>
-      <div class="tabs" id="tabs"></div>
-      <div id="closetContent"></div>
+    <div class="collection">
+      <div class="eyebrow">Collection two</div>
+      <h2>Christmas time</h2>
+      <p>25 festive scenes filled with decorations, winter activities, and holiday details.</p>
+      <button class="primary" onclick="filterCollection('christmas')">Explore Christmas</button>
     </div>
   </div>
 </section>
 
-<section id="photo" class="page">
-  <div class="eyebrow">The lookbook studio</div>
-  <h2>Save your character</h2>
-  <p>Give your outfit a name and add it to your gallery.</p>
-  <div class="photo-layout">
-    <div class="photo-card">
-      <div class="photo-frame" id="photoPreview"></div>
-      <p style="font-size:12px;color:#927e6d">Your finished outfit</p>
+<section id="browse">
+  <div class="eyebrow">The coloring library</div>
+  <h1>Choose a page.</h1>
+  <div class="toolbar">
+    <button class="soft active" id="allFilter" onclick="filterCollection('all')">All 50</button>
+    <button class="soft" id="everydayFilter" onclick="filterCollection('everyday')">Everyday</button>
+    <button class="soft" id="christmasFilter" onclick="filterCollection('christmas')">Christmas</button>
+  </div>
+  <div class="page-grid" id="pageGrid"></div>
+</section>
+
+<section id="studio">
+  <div class="eyebrow">Your coloring page</div>
+  <h1 id="pageTitle">Cozy coloring</h1>
+  <div class="studio-layout">
+    <div class="drawing-panel">
+      <div class="drawing-head">
+        <button class="soft" onclick="showPage('browse')">← All pages</button>
+        <span id="progress" class="hint">Ready to color</span>
+      </div>
+      <svg id="art" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="toolbar">
+        <button class="soft" onclick="undo()">Undo</button>
+        <button class="soft" onclick="resetPage()">Reset page</button>
+        <button class="soft" onclick="savePage()">Save picture</button>
+      </div>
+      <p class="hint">Tap any enclosed area in the illustration to fill it with your selected color. Use the eraser to make an area white again.</p>
     </div>
-    <div class="photo-details">
-      <h2 style="font-size:25px">A new favorite</h2>
-      <label for="lookName">Name your outfit</label>
-      <input id="lookName" maxlength="35" placeholder="e.g. Sunday afternoon">
-      <div class="section-label">Choose a photo background</div>
-      <div class="color-row" id="photoColors"></div>
-      <div class="section-label">Photo frame</div>
-      <div class="color-row" id="frameColors"></div>
-      <button class="primary" onclick="saveLook()">Save to my gallery</button>
-      <button class="soft-button" onclick="go('dress')">Back to dressing room</button>
-    </div>
+    <aside class="panel">
+      <h3>Your colors</h3>
+      <div class="palette" id="palette"></div>
+      <div class="section-label" style="margin-top:22px">Tools</div>
+      <div class="tool-list">
+        <button class="soft active" id="fillTool" onclick="setTool('fill')">Fill bucket</button>
+        <button class="soft" id="eraseTool" onclick="setTool('erase')">Eraser</button>
+      </div>
+      <div class="section-label">Coloring tips</div>
+      <p class="hint">Try using different shades in one illustration. You can always undo a color or start the page over.</p>
+      <div class="section-label">Page navigation</div>
+      <div class="tool-list">
+        <button class="soft" onclick="movePage(-1)">Previous</button>
+        <button class="soft" onclick="movePage(1)">Next</button>
+      </div>
+    </aside>
   </div>
 </section>
 
-<section id="gallery" class="page">
-  <div class="eyebrow">Your personal collection</div>
-  <h2>My gallery</h2>
-  <p>All your saved looks, together in one place.</p>
-  <div id="galleryContent"></div>
+<section id="gallery">
+  <div class="eyebrow">Your saved artwork</div>
+  <h1>My gallery.</h1>
+  <p class="intro">Your saved coloring pages live here.</p>
+  <div id="galleryGrid" class="page-grid"></div>
 </section>
 </main>
-<div class="footer">little lookbook · your own little fashion world</div>
+<div class="footer">colorful days · a little space to create</div>
 
 <script>
-const $ = id => document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+const pages=[
+["A Cozy Bedroom","everyday","bedroom"],
+["The Little Flower Shop","everyday","flowershop"],
+["A Day at the Beach","everyday","beach"],
+["The Cat Café","everyday","catcafe"],
+["A Garden Picnic","everyday","picnic"],
+["The Book Nook","everyday","bookshop"],
+["A Sweet Bakery","everyday","bakery"],
+["The Greenhouse","everyday","greenhouse"],
+["The Art Studio","everyday","artstudio"],
+["A Little Treehouse","everyday","treehouse"],
+["The Ice Cream Stand","everyday","icecream"],
+["A Rainy Afternoon","everyday","rainy"],
+["The Birthday Party","everyday","birthday"],
+["The Farmers Market","everyday","market"],
+["A Seaside Cottage","everyday","cottage"],
+["The Puppy Park","everyday","puppypark"],
+["The Aquarium","everyday","aquarium"],
+["A Tea Party","everyday","teaparty"],
+["The Music Room","everyday","music"],
+["The Camping Trip","everyday","camping"],
+["A Pond in Spring","everyday","pond"],
+["The Sewing Room","everyday","sewing"],
+["A Fruit Stand","everyday","fruitstand"],
+["The Little Café","everyday","cafe"],
+["A Day at the Farm","everyday","farm"],
+["Christmas Living Room","christmas","xmasroom"],
+["The Gingerbread House","christmas","gingerbread"],
+["Santa's Workshop","christmas","workshop"],
+["A Snowy Village","christmas","village"],
+["Decorating the Tree","christmas","tree"],
+["The Christmas Bakery","christmas","xmasbakery"],
+["A Reindeer Stable","christmas","stable"],
+["The Holiday Market","christmas","holidaymarket"],
+["A Christmas Window","christmas","window"],
+["The Snowman Family","christmas","snowfamily"],
+["A Sleigh Ride","christmas","sleigh"],
+["Christmas Stockings","christmas","stockings"],
+["The Toy Train","christmas","train"],
+["A Festive Wreath","christmas","wreath"],
+["Christmas at the Cabin","christmas","cabin"],
+["The Candy Cane Lane","christmas","candycane"],
+["A Winter Tea Party","christmas","wintertea"],
+["The Christmas Concert","christmas","concert"],
+["The North Pole","christmas","northpole"],
+["A Snow Globe","christmas","snowglobe"],
+["The Ornament Shop","christmas","ornaments"],
+["A Cozy Fireplace","christmas","fireplace"],
+["The Christmas Carousel","christmas","carousel"],
+["A Holiday Gift Shop","christmas","giftshop"],
+["Christmas Morning","christmas","morning"],
+["The Little Elf Village","christmas","elfvillage"]
+];
 
-const categories = {
-  "Hair":["Hair style","Hair color"],
-  "Face":["Skin tone","Eyes","Extras"],
-  "Tops":["Baby tees","Tank tops","T-shirts","Sweaters","Cardigans","Hoodies","Off shoulder"],
-  "Bottoms":["Jeans","Pants","Shorts","Skirts"],
-  "Dresses":["Mini dresses","Maxi dresses","Sundresses","Special dresses"],
-  "Shoes":["Sneakers","Boots","Sandals","Flats"],
-  "Accessories":["Bags","Necklaces","Bracelets","Sunglasses","Hair accessories"],
-  "Background":["Dressing room"]
-};
+const palette=[
+"#f6b5b4","#f4c7a1","#f2df9a","#c5d9b9",
+"#a8c8df","#c8b4d9","#e8d3bd","#e89a78",
+"#e9a9cb","#b6d5cf","#f5e8d4","#9c7965",
+"#f3d6a5","#d5b7a4","#a9b4d0","#f7a85d",
+"#ffffff","#d9d9d9","#8c8178","#51483f"
+];
+let current=0,selected=palette[0],tool="fill",history=[],filter="all";
 
-const items = {
-  "Baby tees":["White baby tee","Pink fitted tee","Striped baby tee","Lace trim tee","Blue graphic tee","Butter yellow tee","Brown fitted tee","Floral baby tee"],
-  "Tank tops":["White ribbed tank","Pink tank","Blue tank","Lace tank","Sage tank","Brown tank","Striped tank"],
-  "T-shirts":["Oversized white tee","Pink oversized tee","Vintage blue tee","Striped tee","Cream tee","Green tee","Graphic tee"],
-  "Sweaters":["Cream knit sweater","Pink sweater","Striped sweater","Mocha sweater","Sage knit","Cable knit"],
-  "Cardigans":["Cream cardigan","Pink cardigan","Blue cardigan","Button-up cardigan","Striped cardigan","Mocha cardigan"],
-  "Hoodies":["Oatmeal hoodie","Pink hoodie","Grey hoodie","Sage hoodie","Zip-up hoodie","Cream oversized hoodie"],
-  "Off shoulder":["Pink off-shoulder","Cream off-shoulder","Striped off-shoulder","Black off-shoulder","Blue off-shoulder"],
-  "Jeans":["Light baggy jeans","Straight blue jeans","Dark denim jeans","Low-rise jeans","Flared jeans","Wide-leg jeans","Cream jeans","Black jeans"],
-  "Pants":["Linen trousers","Grey sweatpants","Cream sweatpants","Brown cargos","Sage cargos","Black leggings","Flared leggings","Khaki trousers"],
-  "Shorts":["Denim shorts","Light denim shorts","White shorts","Athletic shorts","Linen shorts","Pink shorts","Brown shorts"],
-  "Skirts":["Denim mini skirt","Pleated skirt","White flowy skirt","Pink mini skirt","Long linen skirt","Plaid skirt","Sage skirt","Black midi skirt"],
-  "Mini dresses":["Pink mini dress","Floral mini dress","White sundress","Blue mini dress","Knit mini dress","Black simple dress"],
-  "Maxi dresses":["Cream maxi dress","Floral maxi dress","Blue maxi dress","Sage maxi dress","Pink maxi dress"],
-  "Sundresses":["Yellow sundress","White floral dress","Pink sundress","Blue gingham dress","Linen sundress","Green floral dress"],
-  "Special dresses":["Satin party dress","Lace occasion dress","Pink bow dress","Blue evening dress","Floral occasion dress"],
-  "Sneakers":["White sneakers","Pink sneakers","Retro sneakers","Cream trainers","Blue sneakers"],
-  "Boots":["Brown boots","Black boots","Cream boots","Tall boots","Suede ankle boots"],
-  "Sandals":["Simple sandals","Brown sandals","White sandals","Pink sandals","Platform sandals"],
-  "Flats":["Ballet flats","Mary Janes","Cream flats","Brown flats"],
-  "Bags":["Brown shoulder bag","Cream shoulder bag","Pink mini bag","Denim bag","Tote bag","Blue shoulder bag"],
-  "Necklaces":["Gold pendant","Pearl necklace","Heart necklace","Silver chain","Tiny flower necklace"],
-  "Bracelets":["Gold bracelet","Pearl bracelet","Beaded bracelet","Silver bracelet"],
-  "Sunglasses":["Brown sunglasses","Pink sunglasses","Classic black shades","Oval sunglasses"],
-  "Hair accessories":["Pink bow","Cream bow","Blue bow","Flower clip","Headband","Claw clip"],
-  "Dressing room":["Cream studio","Pink studio","Sage studio","Blue studio","Flower studio"]
-};
-
-const colors = {
-  "White":"#f5eee5","Cream":"#e9ddcd","Oat":"#cbb9a6","Mocha":"#927762",
-  "Brown":"#755844","Pink":"#e7c4c2","Dusty pink":"#c99798","Blue":"#a9c4d0",
-  "Sage":"#b5c5ad","Green":"#829a7c","Yellow":"#e8d59d","Black":"#514b49",
-  "Grey":"#aaa9a6","Denim":"#7894aa","Lilac":"#c8b7d4"
-};
-const colorNames=Object.keys(colors);
-const skinTones=["#f7dfc9","#edc6a4","#d9a77f","#bd825e","#925b43","#684332"];
-const hairColors=["#49352e","#79533b","#b17b4b","#d4aa6d","#d9c4a0","#b56c60","#5c5360","#252322"];
-const hairstyles=["Long waves","Straight long","Short bob","Curly hair","High ponytail","Half up"];
-const eyeStyles=["Soft eyes","Round eyes","Closed smile"];
-const backgrounds=["#f8f0e6","#f1dfdf","#e6ebdf","#e1eaf0","#eee4d5"];
-const frameColors=["#fffaf3","#e9d6ce","#dfe6da","#dce6ec","#d6c2ae"];
-
-let outfit={
- skin:0,hair:0,hairColor:0,eyes:0,faceExtra:"None",
- top:"White baby tee",bottom:"Light baggy jeans",dress:"",
- shoes:"White sneakers",bag:"",necklace:"",bracelet:"",
- sunglasses:"",hairAccessory:"",background:0,
- photoBg:0,photoFrame:0
-};
-let activeCategory="Hair";
-let activeSub="Hair style";
-
-function clothingColor(name){
- const n=name.toLowerCase();
- if(n.includes("pink"))return colors.Pink;
- if(n.includes("blue"))return colors.Blue;
- if(n.includes("sage")||n.includes("green"))return colors.Sage;
- if(n.includes("brown")||n.includes("mocha"))return colors.Brown;
- if(n.includes("black"))return colors.Black;
- if(n.includes("yellow"))return colors.Yellow;
- if(n.includes("grey"))return colors.Grey;
- if(n.includes("denim")||n.includes("jean"))return colors.Denim;
- if(n.includes("plaid"))return colors.Mocha;
- if(n.includes("floral"))return colors["Dusty pink"];
- if(n.includes("cream")||n.includes("white")||n.includes("linen")||n.includes("oat"))return colors.Cream;
- return colors.Oat;
+function P(d,fill="white",extra=""){
+ return `<path class="region" data-region="1" d="${d}" fill="${fill}" ${extra}/>`;
 }
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function E(cx,cy,rx,ry,fill="white"){
+ return `<ellipse class="region" data-region="1" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${fill}"/>`;
+}
+function C(cx,cy,r,fill="white"){
+ return `<circle class="region" data-region="1" cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"/>`;
+}
+function R(x,y,w,h,rx=0){
+ return `<rect class="region" data-region="1" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="white"/>`;
+}
+function L(d,cls="line"){return `<path class="${cls}" d="${d}"/>`}
+function group(x,y,s,content){return `<g transform="translate(${x} ${y}) scale(${s/100})">${content}</g>`}
+function flower(){
+ let a="";
+ for(let i=0;i<8;i++)a+=`<ellipse class="region" data-region="1" cx="50" cy="22" rx="12" ry="20" fill="white" transform="rotate(${i*45} 50 50)"/>`;
+ return a+C(50,50,12)+L("M50 62 Q45 78 49 96")+P("M49 81 Q23 66 28 88 Q39 98 49 89Z")+P("M50 88 Q75 67 76 87 Q67 99 50 96Z");
+}
+function plant(){
+ return P("M27 54 Q50 61 73 54 L68 94 Q50 100 32 94Z")+L("M50 56 Q45 30 27 22 M50 52 Q57 24 77 16 M49 43 Q50 18 49 8")+P("M28 23 Q5 7 12 35 Q25 44 35 32Z")+P("M77 17 Q99 1 91 31 Q81 43 68 30Z")+P("M49 18 Q27 0 49 0 Q71 0 49 18Z");
+}
+function mug(){
+ return R(20,24,57,60,10)+P("M77 36 Q101 31 96 55 Q92 69 77 63Z")+L("M30 35 Q50 45 68 35")+L("M34 54 Q50 62 66 54")+L("M38 15 Q30 4 39 0 M53 15 Q45 4 54 0");
+}
+function book(){
+ return P("M8 19 Q31 8 50 22 L50 91 Q29 77 8 88Z")+P("M50 22 Q73 8 92 19 L92 88 Q71 77 50 91Z")+L("M50 22 L50 91")+L("M19 35 Q31 29 41 36 M19 46 Q31 40 41 47 M60 36 Q73 29 83 35 M60 47 Q73 40 83 46","detail")+P("M34 13 Q50 2 66 13 L63 25 Q50 20 37 25Z");
+}
+function cake(){
+ return R(14,52,72,38,5)+P("M14 52 Q25 42 36 52 Q48 40 60 52 Q74 42 86 52 L86 64 L14 64Z")+E(50,42,36,8)+L("M50 32 L50 14")+P("M50 12 Q38 2 50 0 Q62 2 50 12Z");
+}
+function cat(){
+ return P("M20 39 L18 8 L42 25 Q52 21 60 25 L83 8 L80 42 Q95 72 70 87 Q50 103 29 85 Q7 67 20 39Z")+E(37,54,3,5)+E(64,54,3,5)+P("M46 64 L54 64 L50 70Z")+L("M50 70 Q43 77 38 71 M50 70 Q57 77 62 71 M30 66 L9 62 M30 72 L8 74 M70 66 L91 62 M70 72 L92 74")+L("M30 33 Q42 40 48 35 M53 35 Q65 40 76 33","detail");
+}
+function dog(){
+ return E(50,58,32,30)+E(50,34,26,25)+P("M29 28 Q5 2 8 45 Q18 58 32 43Z")+P("M71 28 Q96 2 92 45 Q82 58 68 43Z")+E(39,34,3,5)+E(61,34,3,5)+E(50,46,7,5)+L("M50 50 Q43 60 37 53 M50 50 Q57 60 63 53")+L("M25 83 Q12 94 22 98 M75 83 Q88 94 78 98");
+}
+function house(){
+ return P("M7 45 L50 7 L93 45 L86 45 L86 92 L14 92 L14 45Z")+R(39,57,22,35,3)+R(21,52,13,16,2)+R(67,52,13,16,2)+L("M39 65 L61 65 M21 60 L34 60 M67 60 L80 60","detail")+P("M8 45 Q50 33 92 45");
+}
+function tree(){
+ return P("M43 61 L57 61 L62 97 L38 97Z")+P("M50 0 Q32 26 17 48 Q33 43 39 53 Q23 66 12 76 Q50 71 88 76 Q77 62 61 53 Q73 43 84 48 Q66 25 50 0Z")+C(35,36,4)+C(64,53,4)+C(48,22,4);
+}
+function cloud(){
+ return E(50,58,36,21)+C(28,52,18)+C(49,38,22)+C(72,53,18)+L("M20 76 Q50 83 80 76","detail");
+}
+function sun(){
+ return C(50,50,25)+Array.from({length:8},(_,i)=>{let a=i*Math.PI/4,x1=50+34*Math.cos(a),y1=50+34*Math.sin(a),x2=50+46*Math.cos(a),y2=50+46*Math.sin(a);return L(`M${x1} ${y1} L${x2} ${y2}`)}).join("")+L("M40 48 Q44 43 47 48 M55 48 Q59 43 62 48 M42 61 Q50 69 59 61","detail");
+}
+function umbrella(){
+ return P("M5 50 Q10 8 50 7 Q90 8 95 50 Q80 39 66 50 Q51 39 35 50 Q19 39 5 50Z")+L("M50 8 L50 87 Q50 100 64 96 Q73 93 68 85");
+}
+function icecream(){
+ return P("M25 40 Q20 12 49 11 Q78 12 75 40Z")+P("M25 40 L75 40 L50 95Z")+L("M36 53 L48 68 M58 52 L43 75 M60 36 Q66 25 56 18","detail")+C(37,26,4)+C(63,31,4);
+}
+function cupcake(){
+ return P("M22 45 Q14 20 35 24 Q40 5 55 20 Q80 9 80 40 Q90 47 78 52 L22 52Z")+P("M23 52 L77 52 L69 92 L31 92Z")+L("M36 61 L39 83 M50 61 L50 84 M64 61 L61 83","detail")+C(51,14,5);
+}
+function gift(){
+ return R(13,32,74,58,5)+R(8,25,84,14,3)+P("M50 26 Q12 24 22 8 Q35 -1 50 26 Q65 -1 78 8 Q88 24 50 26Z")+L("M50 25 L50 90");
+}
+function snowman(){
+ return E(50,70,30,28)+E(50,31,22,22)+P("M47 34 L72 38 L65 43 L48 41Z")+L("M39 25 L43 25 M57 25 L61 25","detail")+P("M28 48 Q50 58 72 48 L75 59 Q50 69 25 59Z")+L("M21 70 L5 55 M79 70 L95 55");
+}
+function ornament(){
+ return C(50,57,31)+R(41,19,18,8,2)+L("M50 19 L50 6 Q50 0 58 0","detail")+P("M50 33 Q28 50 50 80 Q72 50 50 33Z")+C(50,56,5);
+}
+function stocking(){
+ return P("M29 9 L70 9 L70 62 Q70 72 87 75 Q98 85 84 93 L29 93 Q10 90 18 74 Q27 61 29 9Z")+R(25,7,49,15,2)+L("M37 28 L37 53 M50 28 L50 53 M63 28 L63 53","detail");
+}
+function gingerbread(){
+ return E(50,14,17,10)+P("M33 20 Q18 26 24 42 L14 54 Q6 65 20 70 L33 61 L35 93 L65 93 L67 61 L80 70 Q94 65 86 54 L76 42 Q82 26 67 20Z")+C(40,39,3)+C(60,39,3)+L("M43 50 Q50 57 57 50 M39 68 L61 68 M40 81 L60 81","detail");
+}
+function fireplace(){
+ return R(10,12,80,80,3)+P("M25 88 Q20 65 36 53 Q33 38 48 25 Q44 50 58 55 Q68 40 65 31 Q88 58 76 88Z")+L("M10 32 L90 32 M10 50 L90 50 M10 70 L90 70","detail")+R(24,6,52,12,2);
+}
+function wreath(){
+ let a=C(50,50,38);
+ for(let i=0;i<12;i++){let t=i*Math.PI/6,x=50+37*Math.cos(t),y=50+37*Math.sin(t);a+=`<ellipse class="region" data-region="1" cx="${x}" cy="${y}" rx="10" ry="5" transform="rotate(${i*30} ${x} ${y})"/>`;}
+ return a+P("M50 11 Q24 -5 30 17 Q38 30 50 20 Q62 30 70 17 Q76 -5 50 11Z")+C(50,50,19);
+}
+function bell(){
+ return P("M18 69 Q28 54 27 37 Q27 9 50 9 Q73 9 73 37 Q72 54 82 69Z")+R(12,68,76,10,4)+C(50,84,7)+P("M50 0 Q36 -5 37 8 Q43 16 50 12 Q57 16 63 8 Q64 -5 50 0Z");
+}
+function candy(){
+ return P("M29 14 Q10 3 8 20 Q7 33 25 40 L25 72 Q25 91 43 91 Q59 91 59 74 L59 42 Q84 35 82 18 Q80 3 62 13 Q46 21 29 14Z")+L("M28 22 L59 22 M26 37 L60 37 M27 53 L59 53 M28 68 L58 68","detail");
+}
+function reindeer(){
+ return E(50,56,29,31)+E(50,27,23,23)+P("M33 16 Q12 -3 17 23 L28 34 M67 16 Q88 -3 83 23 L72 34Z")+C(41,27,3)+C(59,27,3)+E(50,41,9,7)+C(50,41,4)+L("M35 84 L29 98 M65 84 L71 98")+C(50,7,5);
+}
+function sleigh(){
+ return P("M8 48 Q50 33 91 48 L79 77 Q53 92 25 77Z")+L("M8 80 Q47 104 88 80 Q97 74 96 65 M23 48 L15 28 M77 48 L85 28")+R(24,25,52,23,8)+L("M35 36 L65 36","detail");
+}
+function mitten(){
+ return P("M28 37 Q19 16 35 10 Q49 4 55 24 Q70 4 84 17 Q98 31 77 52 L75 77 Q50 91 24 77Z")+R(22,72,58,15,5)+L("M34 43 Q48 56 63 43 M34 59 Q49 69 65 58","detail");
+}
+function cookie(){
+ return C(50,50,40)+C(32,36,5)+C(67,28,4)+C(69,61,6)+C(36,68,4)+C(53,49,4)+L("M25 49 Q50 60 76 45","detail");
+}
+function vase(){
+ return P("M31 10 L69 10 Q65 30 76 50 Q87 80 67 93 L33 93 Q13 80 24 50 Q35 30 31 10Z")+L("M32 20 L68 20 M30 75 Q50 85 70 75","detail");
+}
+function basket(){
+ return P("M12 42 Q50 50 88 42 L78 91 L22 91Z")+L("M23 44 Q25 5 50 5 Q75 5 77 44")+L("M28 56 L35 83 M44 55 L48 86 M59 55 L61 84 M74 54 L70 83","detail");
+}
+function fish(){
+ return P("M10 50 Q36 10 76 50 Q36 90 10 50Z")+P("M75 50 L96 29 L96 71Z")+C(34,44,4)+L("M40 34 Q50 50 40 66","detail");
+}
+function tent(){
+ return P("M5 85 L49 8 L95 85Z")+P("M49 8 L49 85 L76 85 Q68 57 49 8Z")+L("M5 85 L95 85 M35 85 Q40 60 49 51 Q61 63 66 85","detail");
+}
+function lantern(){
+ return P("M26 19 L74 19 L81 84 Q50 98 19 84Z")+R(31,28,38,43,5)+L("M50 19 L50 7 Q50 0 60 0 M36 36 L36 62 M64 36 L64 62","detail");
+}
+function pumpkin(){
+ return E(50,55,33,34)+E(32,54,16,29)+E(68,54,16,29)+P("M44 22 Q40 7 55 5 Q62 7 58 23Z")+L("M49 18 Q66 4 73 12","detail");
+}
+function drawObject(type){
+ const funcs={flower,plant,mug,book,cake,cat,dog,house,tree,cloud,sun,umbrella,icecream,cupcake,gift,snowman,ornament,stocking,gingerbread,fireplace,wreath,bell,candy,reindeer,sleigh,mitten,cookie,vase,basket,fish,tent,lantern,pumpkin};
+ return (funcs[type]||flower)();
+}
+function obj(type,x,y,s){return group(x,y,s,drawObject(type));}
 
-function hairBack(){
- const c=hairColors[outfit.hairColor];
- const styles=[
- `<path d="M108 178 Q73 104 112 61 Q150 22 211 48 Q275 73 247 183 L252 284 Q232 310 220 270 L218 155 Q172 198 112 150 L111 267 Q90 294 87 256Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
- `<path d="M106 170 Q87 51 174 42 Q258 39 252 163 L242 286 Q220 294 220 259 L218 128 Q171 157 112 127 L111 270 Q91 285 87 255Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
- `<path d="M107 169 Q88 55 174 48 Q251 42 251 157 L243 218 Q218 230 209 200 L150 204 Q123 230 99 208Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
- `<path d="M104 166 Q73 92 115 55 Q160 17 212 49 Q275 81 246 173 L258 252 Q240 285 224 248 Q216 289 194 260 Q177 292 159 263 Q132 293 120 257 Q88 285 85 246Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
- `<path d="M109 158 Q85 48 173 43 Q253 42 249 151 L241 264 L221 271 L218 126 Q174 151 111 128Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M193 64 Q228 15 257 47 Q278 80 243 100Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
- `<path d="M106 170 Q83 54 172 43 Q253 41 251 155 L240 276 Q218 291 216 250 L216 128 Q170 154 112 128 L111 270 Q91 289 87 253Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M115 70 Q166 8 224 57 Q189 95 115 94Z" fill="${c}" stroke="#594238" stroke-width="3"/>`
- ];
- return styles[outfit.hair];
+const scenes={
+ bedroom:()=>obj("bed",0,0,0),
+ flowershop:()=>obj("flower",0,0,0),
+ beach:()=>obj("umbrella",0,0,0),
+ catcafe:()=>obj("cat",0,0,0),
+ picnic:()=>obj("basket",0,0,0),
+ bookshop:()=>obj("book",0,0,0),
+ bakery:()=>obj("cake",0,0,0),
+ greenhouse:()=>obj("plant",0,0,0),
+ artstudio:()=>obj("vase",0,0,0),
+ treehouse:()=>obj("house",0,0,0),
+ icecream:()=>obj("icecream",0,0,0),
+ rainy:()=>obj("umbrella",0,0,0),
+ birthday:()=>obj("cake",0,0,0),
+ market:()=>obj("basket",0,0,0),
+ cottage:()=>obj("house",0,0,0),
+ puppypark:()=>obj("dog",0,0,0),
+ aquarium:()=>obj("fish",0,0,0),
+ teaparty:()=>obj("mug",0,0,0),
+ music:()=>obj("vase",0,0,0),
+ camping:()=>obj("tent",0,0,0),
+ pond:()=>obj("fish",0,0,0),
+ sewing:()=>obj("basket",0,0,0),
+ fruitstand:()=>obj("basket",0,0,0),
+ cafe:()=>obj("mug",0,0,0),
+ farm:()=>obj("house",0,0,0),
+ xmasroom:()=>obj("fireplace",0,0,0),
+ gingerbread:()=>obj("gingerbread",0,0,0),
+ workshop:()=>obj("gift",0,0,0),
+ village:()=>obj("house",0,0,0),
+ tree:()=>obj("tree",0,0,0),
+ xmasbakery:()=>obj("cookie",0,0,0),
+ stable:()=>obj("reindeer",0,0,0),
+ holidaymarket:()=>obj("gift",0,0,0),
+ window:()=>obj("ornament",0,0,0),
+ snowfamily:()=>obj("snowman",0,0,0),
+ sleigh:()=>obj("sleigh",0,0,0),
+ stockings:()=>obj("stocking",0,0,0),
+ train:()=>obj("gift",0,0,0),
+ wreath:()=>obj("wreath",0,0,0),
+ cabin:()=>obj("house",0,0,0),
+ candycane:()=>obj("candy",0,0,0),
+ wintertea:()=>obj("mug",0,0,0),
+ concert:()=>obj("bell",0,0,0),
+ northpole:()=>obj("reindeer",0,0,0),
+ snowglobe:()=>obj("snowman",0,0,0),
+ ornaments:()=>obj("ornament",0,0,0),
+ fireplace:()=>obj("fireplace",0,0,0),
+ carousel:()=>obj("gift",0,0,0),
+ giftshop:()=>obj("gift",0,0,0),
+ morning:()=>obj("stocking",0,0,0),
+ elfvillage:()=>obj("house",0,0,0)
+};
+
+/* Detailed scenes are composed as individual illustrated objects,
+   with large coloring regions and decorative line work. */
+function sceneArt(key){
+ let a="";
+ const add=(t,x,y,s)=>a+=obj(t,x,y,s);
+ const ground=L("M35 535 Q180 520 300 535 Q430 550 565 530");
+ const sky=L("M45 95 Q110 60 175 90 M405 83 Q470 53 545 90","detail");
+ const stars=[[70,90],[510,125],[450,65],[130,150],[540,240]];
+ const starMarkup=stars.map(([x,y])=>C(x,y,7)).join("");
+ const flowerRow=()=>{add("flower",45,410,95);add("flower",455,410,95);add("plant",240,420,120)};
+ const scene={
+ bedroom:()=>{add("cloud",70,65,110);add("house",390,75,150);add("bed",115,245,380);add("mug",30,395,75);add("plant",470,395,90);},
+ flowershop:()=>{add("house",170,65,270);add("flower",40,300,125);add("vase",220,365,140);add("plant",420,300,125);add("basket",35,455,110);add("flower",440,445,90);},
+ beach:()=>{add("sun",450,50,100);add("umbrella",75,175,200);add("basket",350,390,125);add("fish",430,185,100);add("cloud",45,55,110);},
+ catcafe:()=>{add("house",175,45,250);add("cat",190,235,190);add("mug",35,395,90);add("cupcake",420,385,100);add("plant",430,220,100);},
+ picnic:()=>{add("sun",455,55,90);add("basket",190,300,200);add("flower",55,380,105);add("flower",440,385,100);add("cloud",65,60,110);add("mug",365,400,80);},
+ bookshop:()=>{add("house",170,45,260);add("book",80,245,145);add("book",235,265,145);add("book",390,245,145);add("mug",245,420,95);},
+ bakery:()=>{add("house",170,40,260);add("cake",200,245,190);add("cupcake",45,385,100);add("cookie",420,400,105);add("basket",230,425,110);},
+ greenhouse:()=>{add("house",150,50,300);add("plant",45,260,150);add("flower",225,250,130);add("plant",390,250,150);add("vase",230,425,110);},
+ artstudio:()=>{add("vase",225,345,155);add("flower",200,130,140);add("flower",315,140,125);add("basket",35,390,110);add("plant",440,385,105);},
+ treehouse:()=>{add("tree",210,35,200);add("house",180,195,220);add("ladder",385,370,105);add("cloud",40,75,100);add("flower",50,420,90);},
+ icecream:()=>{add("sun",450,60,95);add("icecream",200,220,180);add("cupcake",45,405,105);add("cookie",420,410,95);add("cloud",60,75,105);},
+ rainy:()=>{add("cloud",170,45,220);add("umbrella",175,210,240);add("mug",50,420,100);add("cat",390,380,130);add("plant",40,275,105);},
+ birthday:()=>{add("cake",180,220,230);add("gift",45,385,115);add("gift",425,380,115);add("cupcake",35,220,95);add("flower",450,220,100);},
+ market:()=>{add("basket",165,320,200);add("pumpkin",55,365,120);add("flower",410,380,105);add("house",185,60,230);add("plant",420,200,105);},
+ cottage:()=>{add("house",150,175,300);add("cloud",40,60,115);add("sun",455,60,95);add("tree",20,300,140);add("flower",425,420,110);},
+ puppypark:()=>{add("dog",180,245,220);add("sun",460,65,95);add("flower",40,410,100);add("ball",410,420,100);add("tree",20,95,145);},
+ aquarium:()=>{add("fish",65,190,160);add("fish",335,270,170);add("fish",190,390,110);add("plant",35,400,100);add("plant",440,400,100);},
+ teaparty:()=>{add("mug",195,260,180);add("cake",35,390,120);add("flower",420,385,105);add("book",205,430,130);},
+ music:()=>{add("vase",230,365,140);add("flower",230,130,130);add("mug",50,410,85);add("book",410,395,120);},
+ camping:()=>{add("tent",155,235,280);add("tree",20,110,155);add("tree",425,105,155);add("lantern",390,390,100);add("cloud",190,55,110);},
+ pond:()=>{add("fish",190,300,170);add("flower",40,365,110);add("flower",440,360,110);add("plant",225,420,120);add("sun",450,55,90);},
+ sewing:()=>{add("basket",175,340,200);add("vase",40,385,100);add("book",380,380,135);add("flower",225,140,125);},
+ fruitstand:()=>{add("basket",175,310,220);add("pumpkin",45,380,120);add("vase",415,380,100);add("house",180,55,235);},
+ cafe:()=>{add("mug",190,275,190);add("cake",35,385,120);add("book",390,385,130);add("plant",425,170,110);},
+ farm:()=>{add("house",175,175,260);add("tree",25,280,150);add("basket",375,395,120);add("sun",450,55,95);add("flower",55,440,90);},
+ xmasroom:()=>{add("tree",35,150,180);add("fireplace",245,220,250);add("stocking",420,135,110);add("gift",65,430,110);add("gift",430,435,110);},
+ gingerbread:()=>{add("gingerbread",180,265,240);add("candy",45,390,105);add("candy",440,390,105);add("cookie",230,450,100);add("candy",235,90,100);},
+ workshop:()=>{add("gift",175,320,210);add("gift",35,405,110);add("gift",410,405,110);add("bell",230,115,125);add("stocking",420,140,105);},
+ village:()=>{add("house",25,235,175);add("house",215,175,190);add("house",405,245,170);add("tree",205,30,130);add("snowman",245,410,115);},
+ tree:()=>{add("tree",180,40,250);add("ornament",45,190,100);add("ornament",420,185,100);add("gift",40,420,105);add("gift",425,420,105);add("star",240,35,100);},
+ xmasbakery:()=>{add("cookie",180,260,220);add("gingerbread",30,365,125);add("cupcake",420,370,115);add("mug",235,430,95);add("candy",220,100,100);},
+ stable:()=>{add("reindeer",180,190,230);add("tree",25,280,140);add("stocking",425,345,105);add("bell",220,440,100);},
+ holidaymarket:()=>{add("house",175,65,250);add("gift",40,330,125);add("gift",230,345,140);add("gift",425,330,125);add("wreath",220,80,110);},
+ window:()=>{add("house",160,80,280);add("ornament",55,320,105);add("ornament",420,320,105);add("bell",235,390,110);},
+ snowfamily:()=>{add("snowman",25,260,145);add("snowman",205,190,190);add("snowman",410,275,140);add("tree",220,35,120);},
+ sleigh:()=>{add("sleigh",155,300,260);add("reindeer",20,180,150);add("reindeer",405,175,150);add("gift",220,210,100);add("star",440,55,85);},
+ stockings:()=>{add("fireplace",160,245,280);add("stocking",35,120,115);add("stocking",240,120,115);add("stocking",435,120,115);add("wreath",240,30,90);},
+ train:()=>{add("gift",180,300,190);add("gift",25,385,110);add("gift",430,385,110);add("bell",220,115,115);add("tree",400,85,135);},
+ wreath:()=>{add("wreath",175,150,250);add("bell",45,385,105);add("ornament",425,375,105);add("candy",230,430,100);},
+ cabin:()=>{add("house",160,180,270);add("tree",15,240,155);add("tree",430,235,155);add("snowman",235,405,115);add("smoke",350,60,100);},
+ candycane:()=>{add("candy",155,155,250);add("candy",360,165,210);add("gift",45,415,105);add("gift",435,415,105);add("star",230,45,95);},
+ wintertea:()=>{add("mug",185,270,210);add("cookie",35,395,110);add("cookie",425,395,110);add("stocking",230,80,105);},
+ concert:()=>{add("bell",190,190,210);add("bell",35,350,125);add("bell",425,350,125);add("tree",220,410,105);},
+ northpole:()=>{add("reindeer",175,230,220);add("house",15,85,165);add("house",415,85,165);add("tree",30,375,115);add("tree",425,375,115);},
+ snowglobe:()=>{add("snowman",205,230,170);add("tree",55,285,130);add("tree",400,285,130);add("ornament",210,35,180);add("gift",220,435,100);},
+ ornaments:()=>{add("ornament",40,190,125);add("ornament",235,110,145);add("ornament",425,195,125);add("bell",45,390,105);add("wreath",225,340,135);},
+ fireplace:()=>{add("fireplace",165,205,280);add("stocking",35,110,110);add("stocking",425,110,110);add("mug",40,410,100);add("gift",430,415,105);},
+ carousel:()=>{add("tree",215,25,150);add("sleigh",145,285,260);add("ornament",40,390,95);add("ornament",435,390,95);add("bell",235,445,95);},
+ giftshop:()=>{add("house",165,65,275);add("gift",30,330,125);add("gift",220,350,135);add("gift",425,325,125);add("wreath",225,80,100);},
+ morning:()=>{add("tree",30,170,155);add("stocking",205,220,180);add("gift",405,360,130);add("mug",35,420,100);add("ornament",430,95,100);},
+ elfvillage:()=>{add("house",15,260,165);add("house",210,190,185);add("house",410,265,165);add("tree",205,25,135);add("gift",225,440,100);}
+ };
+ if(scene[key])scene[key]();
+ a+=ground+sky;
+ a+=starMarkup;
+ a+=`<path class="line" d="M35 535 Q110 525 180 535 T320 535 T565 535"/>`;
+ a+=`<path class="detail" d="M55 552 Q90 540 120 552 M470 557 Q510 540 550 552"/>`;
+ return a;
 }
-function topSvg(name){
- if(!name)return "";
- let c=clothingColor(name),n=name.toLowerCase();
- let sleeve=n.includes("sweater")||n.includes("hoodie")||n.includes("cardigan")?true:n.includes("tee")||n.includes("t-shirt")||n.includes("off-shoulder");
- let neckline=n.includes("tank")||n.includes("off-shoulder")?"M133 231 Q180 250 227 231":"M137 218 Q180 247 223 218";
- let path=n.includes("hoodie")?
- `<path d="M140 219 Q180 249 220 219 L238 245 Q260 261 250 306 L239 365 L121 365 L110 306 Q100 261 122 245Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M143 222 Q180 187 217 222 L204 246 Q180 259 156 246Z" fill="none" stroke="#594238" stroke-width="4"/><path d="M177 255 L177 345 M190 255 L190 345" stroke="#8b7565" stroke-width="2"/>`
- :`<path d="M140 219 Q180 247 220 219 L238 242 Q257 255 249 301 L239 365 L121 365 L111 301 Q103 255 122 242Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="${neckline}" fill="none" stroke="#594238" stroke-width="4"/>`;
- if(sleeve)path+=`<path d="M125 240 Q104 238 103 270 L112 301 L130 292 L136 258Z M235 240 Q256 238 257 270 L248 301 L230 292 L224 258Z" fill="${c}" stroke="#594238" stroke-width="4"/>`;
- if(n.includes("lace"))path+=`<path d="M128 354 Q180 363 232 354" stroke="#fffaf3" stroke-width="5" stroke-dasharray="3 4" fill="none"/>`;
- if(n.includes("stripe"))path+=`<path d="M117 278 Q180 290 244 278 M115 309 Q180 321 245 309 M119 339 Q180 350 241 339" stroke="#fffaf3" stroke-width="5" opacity=".8" fill="none"/>`;
- if(n.includes("cardigan"))path+=`<path d="M180 245 L180 365 M166 273 L166 279 M166 301 L166 307 M166 329 L166 335" stroke="#806452" stroke-width="2" fill="none"/>`;
- return path;
-}
-function bottomSvg(name){
- if(!name)return "";
- let c=clothingColor(name),n=name.toLowerCase();
- if(n.includes("skirt")){
-  let shape=n.includes("flowy")||n.includes("long")||n.includes("midi")?
-  "M130 355 Q180 370 230 355 L260 520 Q180 540 100 520Z":
-  "M130 355 Q180 369 230 355 L247 453 Q180 470 113 453Z";
-  return `<path d="${shape}" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 367 L180 515 M143 372 L151 507 M215 372 L207 507" stroke="#fffaf3" opacity=".4" stroke-width="3"/>`;
+
+/* Some small scene-specific props and decorations */
+function extraFor(key){
+ let a="";
+ const f=(x,y,s)=>a+=obj("flower",x,y,s);
+ const c=(x,y,s)=>a+=obj("cloud",x,y,s);
+ if(["beach","picnic","cottage","icecream","market","farm","pond"].includes(key)){c(35,40,95);c(445,35,95);f(30,445,75);f(480,445,75);}
+ if(key.startsWith("xmas")||["gingerbread","workshop","village","tree","stable","holidaymarket","snowfamily","sleigh","stockings","train","wreath","cabin","candycane","wintertea","concert","northpole","snowglobe","ornaments","fireplace","carousel","giftshop","morning","elfvillage"].includes(key)){
+  for(let i=0;i<5;i++)a+=C(65+i*105,115+(i%2)*22,5);
+  a+=L("M35 160 Q90 140 140 160 M460 160 Q510 140 565 160","detail");
  }
- let shorts=n.includes("shorts");
- if(shorts)return `<path d="M123 354 Q180 370 237 354 L232 440 L185 440 L180 405 L172 440 L128 440Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 370 L180 408" stroke="#594238" stroke-width="3"/>`;
- let flare=n.includes("flared");
- let baggy=n.includes("baggy")||n.includes("wide")||n.includes("cargo");
- return `<path d="M125 354 Q180 367 235 354 L225 ${flare?510:495} L${flare?240:216} 570 L181 570 L179 415 L170 570 L${flare?120:144} 570 L${flare?138:135} ${flare?510:495}Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 369 L180 416" stroke="#594238" stroke-width="3"/><path d="M${baggy?139:151} 380 L${baggy?147:156} 480 M220 380 L212 480" stroke="#fffaf3" stroke-width="3" opacity=".4"/>`;
+ if(key==="aquarium"){a+=L("M30 130 Q75 110 120 130 M390 150 Q450 130 520 150","detail");}
+ if(key==="bedroom"){a+=L("M50 160 Q100 140 150 160 M450 180 Q500 155 550 180","detail");}
+ return a;
 }
-function dressSvg(name){
- if(!name)return "";
- let c=clothingColor(name),n=name.toLowerCase();
- let long=n.includes("maxi");
- return `<path d="M140 219 Q180 247 220 219 L239 246 Q253 262 246 305 L${long?270:247} ${long?535:470} Q180 ${long?555:482} ${long?90:113} ${long?535:470} L114 305 Q107 262 121 246Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M140 220 Q180 247 220 220" fill="none" stroke="#594238" stroke-width="4"/><path d="M180 251 L180 ${long?535:470}" stroke="#fffaf3" stroke-width="3" opacity=".5"/>${n.includes("floral")?'<g fill="#fffaf3"><circle cx="145" cy="315" r="7"/><circle cx="210" cy="380" r="8"/><circle cx="156" cy="440" r="7"/><circle cx="217" cy="290" r="6"/></g>':""}`;
+function pageSVG(index,interactive=false){
+ let key=pages[index][2];
+ let art=`<svg xmlns="${NS}" viewBox="0 0 600 600"><rect width="600" height="600" fill="white"/>`;
+ art+=`<path d="M18 18 Q300 5 582 18 L582 582 Q300 595 18 582Z" fill="none" stroke="#51483f" stroke-width="2.5"/>`;
+ art+=sceneArt(key)+extraFor(key);
+ art+="</svg>";
+ return art;
 }
-function characterSVG(){
- const skin=skinTones[outfit.skin];
- const eyes=outfit.eyes===2?
- `<path d="M143 155 Q153 165 163 155 M197 155 Q207 165 217 155" stroke="#594238" stroke-width="3" fill="none" stroke-linecap="round"/>`:
- `<g fill="#594238"><ellipse cx="154" cy="156" rx="4" ry="6"/><ellipse cx="206" cy="156" rx="4" ry="6"/></g>`;
- const hair=hairBack();
- const shoes=outfit.shoes?`<g stroke="#594238" stroke-width="4"><path d="M125 563 Q148 554 170 563 L169 588 Q144 599 113 585 Q110 573 125 563Z" fill="${clothingColor(outfit.shoes)}"/><path d="M190 563 Q212 554 235 563 Q250 573 247 585 Q216 599 191 588Z" fill="${clothingColor(outfit.shoes)}"/><path d="M116 581 Q143 592 169 583 M191 583 Q220 592 247 581" fill="none"/></g>`:"";
- const faceExtra=outfit.faceExtra==="Freckles"?`<g fill="#a66f56"><circle cx="137" cy="171" r="2"/><circle cx="145" cy="176" r="2"/><circle cx="220" cy="171" r="2"/><circle cx="212" cy="176" r="2"/></g>`:"";
- const hairFront=outfit.hair===2?
- `<path d="M108 132 Q112 42 177 45 Q239 44 249 133 Q216 99 180 108 Q141 94 108 132Z" fill="${hairColors[outfit.hairColor]}" stroke="#594238" stroke-width="4"/>`:
- `<path d="M110 132 Q114 46 177 45 Q239 44 249 132 Q218 102 180 111 Q143 101 110 132Z" fill="${hairColors[outfit.hairColor]}" stroke="#594238" stroke-width="4"/>`;
- let outfitTop=outfit.dress?dressSvg(outfit.dress):topSvg(outfit.top);
- let outfitBottom=outfit.dress?"":bottomSvg(outfit.bottom);
- let bag=outfit.bag?`<g stroke="#594238" stroke-width="3"><path d="M235 282 Q270 270 275 306 L273 358 L238 358Z" fill="${clothingColor(outfit.bag)}"/><path d="M242 289 Q242 258 260 258 Q278 258 274 290" fill="none"/></g>`:"";
- let necklace=outfit.necklace?`<path d="M145 224 Q180 273 215 224" fill="none" stroke="#b18a53" stroke-width="3"/><circle cx="180" cy="263" r="5" fill="#c6a46e"/>`:"";
- let bow=outfit.hairAccessory?`<g transform="translate(225 78)" stroke="#594238" stroke-width="2"><path d="M0 0 Q-31 -29 -29 1 Q-23 19 0 5 Q23 19 29 1 Q31 -29 0 0Z" fill="${clothingColor(outfit.hairAccessory)}"/><circle r="5" fill="#b18a76"/></g>`:"";
- let glasses=outfit.sunglasses?`<g fill="none" stroke="#594238" stroke-width="3"><rect x="132" y="145" width="39" height="23" rx="9"/><rect x="189" y="145" width="39" height="23" rx="9"/><path d="M171 153 L189 153"/></g>`:"";
- let bracelet=outfit.bracelet?`<ellipse cx="119" cy="302" rx="8" ry="5" fill="none" stroke="#b18a53" stroke-width="3"/>`:"";
- return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 620">
- <ellipse cx="180" cy="592" rx="95" ry="12" fill="#9c806b" opacity=".12"/>
- ${hair}
- <path d="M148 190 L146 221 L130 241 L119 305 L133 316 L149 268 L153 226 L207 226 L211 268 L227 316 L241 305 L230 241 L214 221 L212 190Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
- <path d="M148 190 Q180 210 212 190 L216 220 Q180 245 144 220Z" fill="${skin}" stroke="#594238" stroke-width="3"/>
- <path d="M147 354 Q180 368 213 354 L210 420 L205 563 L175 563 L169 420 L155 563 L124 563 L137 420Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
- ${outfitBottom}
- ${outfitTop}
- ${shoes}
- <path d="M145 127 Q180 99 215 127 L224 165 Q219 207 180 214 Q141 207 136 165Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
- ${eyes}
- <path d="M169 181 Q180 188 191 181" fill="none" stroke="#a66f56" stroke-width="2.5" stroke-linecap="round"/>
- <ellipse cx="137" cy="176" rx="8" ry="5" fill="#d98f86" opacity=".3"/><ellipse cx="223" cy="176" rx="8" ry="5" fill="#d98f86" opacity=".3"/>
- ${faceExtra}${hairFront}${glasses}${necklace}${bag}${bracelet}${bow}
- </svg>`;
+function loadArt(i){
+ current=i;history=[];
+ $("pageTitle").textContent=pages[i][0];
+ $("art").innerHTML=sceneArt(pages[i][2])+extraFor(pages[i][2])+L("M35 535 Q180 520 300 535 Q430 550 565 530");
+ $("art").setAttribute("data-page",i);
+ $("art").querySelectorAll(".region").forEach((el,n)=>{
+  el.dataset.id=n;
+  el.addEventListener("click",()=>colorRegion(el));
+ });
+ updateProgress();
+ showPage("studio");
 }
-function renderCharacter(){
- $("character").outerHTML=characterSVG().replace("<svg ","<svg id='character' ");
- $("homeCharacter").innerHTML=characterSVG();
+function colorRegion(el){
+ if(!el.classList.contains("region"))return;
+ history.push({el,color:el.getAttribute("fill")||"white"});
+ el.setAttribute("fill",tool==="erase"?"white":selected);
+ updateProgress();
 }
-function go(page){
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- $(page).classList.add("active");
- if(page==="photo")renderPhoto();
- if(page==="gallery")renderGallery();
- if(page==="dress"){renderCloset();renderCharacter();}
+function updateProgress(){
+ let filled=[...$("art").querySelectorAll(".region")].filter(x=>(x.getAttribute("fill")||"white")!=="white").length;
+ let total=$("art").querySelectorAll(".region").length;
+ $("progress").textContent=filled+" areas colored";
+}
+function undo(){
+ let last=history.pop();
+ if(last){last.el.setAttribute("fill",last.color);updateProgress();}
+}
+function resetPage(){
+ if(!confirm("Start this coloring page over?"))return;
+ loadArt(current);
+}
+function setTool(t){
+ tool=t;
+ $("fillTool").classList.toggle("active",t==="fill");
+ $("eraseTool").classList.toggle("active",t==="erase");
+}
+function renderPalette(){
+ $("palette").innerHTML=palette.map(c=>`<button class="swatch ${c===selected?"selected":""}" style="background:${c}" aria-label="Choose ${c}" onclick="chooseColor('${c}')"></button>`).join("");
+}
+function chooseColor(c){selected=c;renderPalette();}
+function showPage(id){
+ ["home","browse","studio","gallery"].forEach(x=>$(x).style.display=x===id?"block":"none");
+ ["navHome","navBrowse","navGallery"].forEach(x=>$(x).classList.remove("active"));
+ if(id==="home")$("navHome").classList.add("active");
+ if(id==="browse"){$("navBrowse").classList.add("active");renderBrowse();}
+ if(id==="gallery"){$("navGallery").classList.add("active");renderGallery();}
  window.scrollTo({top:0,behavior:"smooth"});
 }
-function renderTabs(){
- $("tabs").innerHTML=Object.keys(categories).map(cat=>
- `<button class="tab ${cat===activeCategory?"selected":""}" onclick="chooseCategory('${cat}')">${cat}</button>`
- ).join("");
+function filterCollection(f){
+ filter=f;
+ showPage("browse");
+ ["allFilter","everydayFilter","christmasFilter"].forEach(x=>$(x).classList.remove("active"));
+ $(f==="all"?"allFilter":f==="everyday"?"everydayFilter":"christmasFilter").classList.add("active");
+ renderBrowse();
 }
-function chooseCategory(cat){
- activeCategory=cat;
- activeSub=categories[cat][0];
- renderCloset();
-}
-function chooseSub(sub){
- activeSub=sub;
- renderCloset();
-}
-function currentOptions(){
- if(activeCategory==="Hair")return activeSub==="Hair style"?hairstyles:hairColors.map((c,i)=>"Hair shade "+(i+1));
- if(activeCategory==="Face"){
-  if(activeSub==="Skin tone")return skinTones.map((c,i)=>"Skin shade "+(i+1));
-  if(activeSub==="Eyes")return eyeStyles;
-  return ["None","Freckles"];
- }
- return items[activeSub]||[];
-}
-function selectedItem(name){
- if(activeCategory==="Hair")return activeSub==="Hair style"?outfit.hair===hairstyles.indexOf(name):outfit.hairColor===hairColors.indexOf(name);
- if(activeCategory==="Face"){
-  if(activeSub==="Skin tone")return outfit.skin===skinTones.indexOf(skinTones[Number(name.split(" ").pop())-1]);
-  if(activeSub==="Eyes")return outfit.eyes===eyeStyles.indexOf(name);
-  return outfit.faceExtra===name;
- }
- const map={
-  "Tops": "top","Bottoms":"bottom","Dresses":"dress","Sneakers":"shoes","Boots":"shoes","Sandals":"shoes","Flats":"shoes",
-  "Bags":"bag","Necklaces":"necklace","Bracelets":"bracelet","Sunglasses":"sunglasses","Hair accessories":"hairAccessory"
- };
- if(activeCategory==="Background")return outfit.background===items["Dressing room"].indexOf(name);
- return outfit[map[activeSub]||""]===name;
-}
-function selectItem(name){
- if(activeCategory==="Hair"){
-  if(activeSub==="Hair style")outfit.hair=hairstyles.indexOf(name);
-  else outfit.hairColor=hairColors.indexOf(name);
- }else if(activeCategory==="Face"){
-  if(activeSub==="Skin tone")outfit.skin=skinTones.indexOf(skinTones[Number(name.split(" ").pop())-1]);
-  else if(activeSub==="Eyes")outfit.eyes=eyeStyles.indexOf(name);
-  else outfit.faceExtra=name;
- }else if(activeCategory==="Background")outfit.background=items["Dressing room"].indexOf(name);
- else if(activeSub==="Dresses"){
-  outfit.dress=name;outfit.top="";outfit.bottom="";
- }else if(activeCategory==="Tops"){
-  outfit.dress="";outfit.top=name;
- }else if(activeCategory==="Bottoms"){
-  outfit.dress="";outfit.bottom=name;
- }else if(["Sneakers","Boots","Sandals","Flats"].includes(activeSub))outfit.shoes=name;
- else if(activeSub==="Bags")outfit.bag=outfit.bag===name?"":name;
- else if(activeSub==="Necklaces")outfit.necklace=outfit.necklace===name?"":name;
- else if(activeSub==="Bracelets")outfit.bracelet=outfit.bracelet===name?"":name;
- else if(activeSub==="Sunglasses")outfit.sunglasses=outfit.sunglasses===name?"":name;
- else if(activeSub==="Hair accessories")outfit.hairAccessory=outfit.hairAccessory===name?"":name;
- renderCloset();renderCharacter();
-}
-function renderCloset(){
- renderTabs();
- const subs=categories[activeCategory];
- let html=`<div class="tabs">${subs.map(s=>`<button class="tab ${s===activeSub?"selected":""}" onclick="chooseSub('${s}')">${s}</button>`).join("")}</div>`;
- let opts=currentOptions();
- html+=`<div class="section-label">${activeSub}</div><div class="item-grid">`;
- opts.forEach((name,i)=>{
-  let color=activeCategory==="Hair"&&activeSub==="Hair color"?hairColors[i]:
-    activeCategory==="Hair"&&activeSub==="Hair style"?hairColors[outfit.hairColor]:
-    activeCategory==="Face"&&activeSub==="Skin tone"?skinTones[i]:
-    activeCategory==="Background"?backgrounds[i]:clothingColor(name);
-  html+=`<button class="item ${selectedItem(name)?"chosen":""}" onclick="selectItem('${name.replace(/'/g,"\\'")}')"><div class="item-swatch" style="background:${color}"></div>${name}</button>`;
+function renderBrowse(){
+ const list=pages.map((p,i)=>({...{p,i}})).filter(x=>filter==="all"||x.p[1]===filter);
+ $("pageGrid").innerHTML=list.map(({p,i})=>`
+ <button class="page-card" onclick="loadArt(${i})">
+  <div class="thumb" id="thumb${i}"></div>
+  <span>${p[0]}</span><small>${p[1]==="everyday"?"Everyday":"Christmas"}</small>
+ </button>`).join("");
+ list.forEach(({i})=>{
+  const thumb=$("thumb"+i);
+  thumb.innerHTML=pageSVG(i);
+  thumb.querySelector("svg").style.width="100%";
  });
- html+="</div>";
- if(activeCategory==="Tops"||activeCategory==="Bottoms"){
-  html+=`<p style="font-size:12px;color:#998675">Choose a dress instead to replace both your top and bottom.</p>`;
- }
- $("closetContent").innerHTML=html;
 }
-function randomOutfit(){
- const pick=a=>a[Math.floor(Math.random()*a.length)];
- outfit.hair=Math.floor(Math.random()*hairstyles.length);
- outfit.hairColor=Math.floor(Math.random()*hairColors.length);
- outfit.skin=Math.floor(Math.random()*skinTones.length);
- outfit.eyes=Math.floor(Math.random()*eyeStyles.length);
- outfit.dress="";
- outfit.top=pick(items["Baby tees"].concat(items["Tank tops"],items["Sweaters"],items["Cardigans"]));
- outfit.bottom=pick(items["Jeans"].concat(items["Pants"],items["Shorts"],items["Skirts"]));
- if(Math.random()<.3){outfit.dress=pick(items["Mini dresses"].concat(items["Sundresses"],items["Maxi dresses"]));outfit.top="";outfit.bottom="";}
- outfit.shoes=pick(items["Sneakers"].concat(items["Boots"],items["Sandals"]));
- outfit.bag=pick(items["Bags"]);
- outfit.necklace=pick(items["Necklaces"]);
- outfit.bracelet="";outfit.sunglasses="";outfit.hairAccessory="";
- renderCloset();renderCharacter();
-}
-function resetOutfit(){
- outfit={skin:0,hair:0,hairColor:0,eyes:0,faceExtra:"None",top:"White baby tee",bottom:"Light baggy jeans",dress:"",shoes:"White sneakers",bag:"",necklace:"",bracelet:"",sunglasses:"",hairAccessory:"",background:0,photoBg:0,photoFrame:0};
- renderCloset();renderCharacter();
-}
-function renderPhoto(){
- $("photoPreview").innerHTML=characterSVG().replace("<svg ","<svg style='background:"+backgrounds[outfit.photoBg]+"' ");
- $("photoColors").innerHTML=backgrounds.map((c,i)=>`<button aria-label="Background ${i+1}" class="color-dot ${outfit.photoBg===i?"selected":""}" style="background:${c}" onclick="outfit.photoBg=${i};renderPhoto()"></button>`).join("");
- $("frameColors").innerHTML=frameColors.map((c,i)=>`<button aria-label="Frame ${i+1}" class="color-dot ${outfit.photoFrame===i?"selected":""}" style="background:${c}" onclick="outfit.photoFrame=${i};renderPhoto()"></button>`).join("");
- $("photoPreview").style.borderColor=frameColors[outfit.photoFrame];
- $("photoPreview").style.background=backgrounds[outfit.photoBg];
-}
-function saveLook(){
- const name=$("lookName").value.trim()||"My new look";
- const svg=characterSVG().replace("<svg ","<svg style='background:"+backgrounds[outfit.photoBg]+"' ");
- const data="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
- let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
- gallery.unshift({id:Date.now(),name,svg:data,frame:frameColors[outfit.photoFrame],outfit:{...outfit}});
+function savePage(){
+ const svg=document.createElementNS(NS,"svg");
+ svg.setAttribute("xmlns",NS);svg.setAttribute("viewBox","0 0 600 600");
+ svg.innerHTML=$("art").innerHTML;
+ const serialized=new XMLSerializer().serializeToString(svg);
+ const url="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serialized);
+ let saved=JSON.parse(localStorage.getItem("colorfulDaysGallery")||"[]");
+ saved.unshift({name:pages[current][0],url,date:new Date().toLocaleDateString()});
  try{
-  localStorage.setItem("littleLookbookGallery",JSON.stringify(gallery));
-  $("lookName").value="";
-  go("gallery");
- }catch(e){
-  alert("Your gallery is full. Try deleting an older saved look and then save again.");
- }
+  localStorage.setItem("colorfulDaysGallery",JSON.stringify(saved));
+  alert("Your coloring page has been saved to My Gallery!");
+ }catch(e){alert("Your gallery storage is full. Delete an older picture and try again.");}
 }
 function renderGallery(){
- let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
- if(!gallery.length){
-  $("galleryContent").innerHTML=`<div class="empty"><h2>Your gallery is waiting</h2><p>Once you save your first outfit, it will show up here. Start creating your first look!</p><button class="primary" onclick="go('dress')">Create a look</button></div>`;
+ let saved=JSON.parse(localStorage.getItem("colorfulDaysGallery")||"[]");
+ if(!saved.length){
+  $("galleryGrid").innerHTML='<div class="empty">You haven’t saved any artwork yet. Choose a page and save your first creation!</div>';
   return;
  }
- $("galleryContent").innerHTML=`<div class="gallery-grid">${gallery.map(item=>`
- <div class="gallery-card">
-  <div class="gallery-image" onclick="viewLook(${item.id})"><img src="${item.svg}" alt="${esc(item.name)}"></div>
-  <h3>${esc(item.name)}</h3>
-  <div class="gallery-actions">
-   <button class="small-button" onclick="editLook(${item.id})">Edit outfit</button>
-   <button class="small-button" onclick="viewLook(${item.id})">View</button>
-   <button class="small-button" onclick="deleteLook(${item.id})">Delete</button>
-  </div>
- </div>`).join("")}</div>`;
+ $("galleryGrid").innerHTML=saved.map((p,i)=>`
+ <div class="page-card">
+  <img src="${p.url}" style="width:100%;border-radius:9px">
+  <span>${p.name}</span><small>${p.date}</small>
+  <button class="soft" style="margin-top:8px" onclick="deleteSaved(${i})">Delete</button>
+ </div>`).join("");
 }
-function editLook(id){
- let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
- let item=gallery.find(x=>x.id===id);
- if(!item)return;
- outfit={...item.outfit};
- go("dress");
-}
-function viewLook(id){
- let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
- let item=gallery.find(x=>x.id===id);
- if(!item)return;
- const win=window.open("","_blank");
- if(!win){alert("Allow pop-ups to open a saved picture.");return;}
- win.document.write(`<title>${esc(item.name)}</title><body style="margin:0;background:#f7f1e8;display:grid;place-items:center;min-height:100vh;font-family:Georgia;color:#554638"><div style="text-align:center"><h2>${esc(item.name)}</h2><img src="${item.svg}" style="height:75vh;max-width:90vw;background:#fffaf3;border:14px solid ${item.frame}"><p>Little Lookbook</p></div></body>`);
- win.document.close();
-}
-function deleteLook(id){
- if(!confirm("Delete this saved look?"))return;
- let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
- gallery=gallery.filter(x=>x.id!==id);
- localStorage.setItem("littleLookbookGallery",JSON.stringify(gallery));
+function deleteSaved(i){
+ let saved=JSON.parse(localStorage.getItem("colorfulDaysGallery")||"[]");
+ saved.splice(i,1);
+ localStorage.setItem("colorfulDaysGallery",JSON.stringify(saved));
  renderGallery();
 }
+function movePage(d){loadArt((current+d+pages.length)%pages.length);}
 function init(){
- renderCharacter();
- $("homeCharacter").innerHTML=characterSVG();
- renderTabs();renderCloset();
+ renderPalette();
+ $("heroArt").innerHTML=pageSVG(0);
+ $("heroArt").querySelector("svg").style.width="100%";
+ renderBrowse();
 }
 init();
 </script>
