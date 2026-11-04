@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Lookbook</title>
+<style>
+:root {
+  --cream:#f7f1e8;
+  --paper:#fffaf3;
+  --beige:#e8dccd;
+  --tan:#c9b49e;
+  --brown:#786352;
+  --dark:#554638;
+  --pink:#ead5d1;
+  --sage:#dce3d5;
+  --blue:#dce5e9;
+  --shadow:0 8px 25px #78635212;
+}
+*{box-sizing:border-box}
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--dark);
+  font-family:Georgia,"Times New Roman",serif;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:17px 5%;background:#fffaf3;border-bottom:1px solid #e9dfd3;
+  position:sticky;top:0;z-index:5;
+}
+.logo{font-size:23px;letter-spacing:1px;font-weight:bold}
+.logo span{color:#b18e7d}
+.nav{display:flex;gap:9px;flex-wrap:wrap}
+.nav button,.soft-button{
+  border:1px solid #dfd1c1;background:#f7f1e8;color:var(--dark);
+  padding:9px 15px;border-radius:22px;font-size:13px;
+}
+.nav button:hover,.soft-button:hover{background:var(--pink)}
+.page{display:none;max-width:1200px;margin:auto;padding:35px 5% 65px}
+.page.active{display:block}
+h1,h2,h3{font-weight:normal}
+h1{font-size:clamp(34px,6vw,58px);margin:0 0 12px}
+h2{font-size:29px;margin:0 0 12px}
+p{line-height:1.6}
+.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:11px;color:#a58a76}
+.home-hero{
+  min-height:510px;border-radius:28px;background:#eee2d5;
+  display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.hero-copy{padding:65px 9%;align-self:center}
+.hero-copy p{max-width:370px;color:#786b60}
+.primary{
+  border:0;background:#9d806d;color:white;border-radius:24px;
+  padding:14px 25px;margin-top:13px;transition:.2s;
+}
+.primary:hover{background:#806452;transform:translateY(-2px)}
+.hero-art{display:flex;align-items:center;justify-content:center;background:#e5d8c9}
+.hero-art svg{width:min(100%,370px);height:430px}
+.home-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.info-card{background:var(--paper);padding:22px;border-radius:19px;border:1px solid #eee4d9}
+.info-card h3{margin:0 0 8px;font-size:19px}
+.dress-layout{display:grid;grid-template-columns:minmax(270px,.85fr) minmax(340px,1.15fr);gap:25px;align-items:start}
+.character-panel{
+  background:#eadfd2;border-radius:24px;padding:18px;position:sticky;top:85px;
+}
+.character-stage{
+  background:#f8f0e6;border-radius:18px;min-height:560px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+#character{width:100%;max-width:360px;height:550px}
+.stage-caption{text-align:center;font-size:12px;color:#927e6d;padding:12px 0 2px}
+.closet{background:var(--paper);border:1px solid #eee4d9;border-radius:24px;padding:20px}
+.closet-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:14px 0;scrollbar-width:thin}
+.tab{
+  flex-shrink:0;border:1px solid #e3d7ca;background:#f8f2eb;
+  border-radius:18px;padding:9px 13px;font-size:12px;color:var(--dark);
+}
+.tab.selected{background:#ddc9b9;border-color:#c6ad99}
+.item-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.item{
+  border:1px solid #eee2d6;background:#faf5ee;border-radius:14px;
+  min-height:94px;padding:10px 5px;color:var(--dark);font-size:12px;
+}
+.item:hover,.item.chosen{border:2px solid #ad8d78;background:#f0e3d8}
+.item-swatch{width:35px;height:35px;border-radius:50%;margin:0 auto 8px;border:1px solid #00000012}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.small-button{border:1px solid #ddcfc0;background:#f7f0e8;padding:9px 12px;border-radius:18px;font-size:12px;color:var(--dark)}
+.small-button:hover{background:var(--pink)}
+.section-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#9b8370;margin:22px 0 9px}
+.color-row{display:flex;gap:9px;flex-wrap:wrap}
+.color-dot{width:29px;height:29px;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px #d8c9b9}
+.color-dot.selected{box-shadow:0 0 0 2px #806452}
+.photo-layout{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
+.photo-card{
+  background:#e8dccd;padding:22px;border-radius:25px;text-align:center;
+}
+.photo-frame{
+  background:#fffaf3;border:10px solid #fffaf3;outline:1px solid #d8c8b7;
+  border-radius:5px;max-width:360px;margin:auto;overflow:hidden;
+}
+.photo-frame svg{display:block;width:100%;height:auto}
+.photo-details{background:var(--paper);padding:25px;border-radius:22px}
+input{
+  width:100%;padding:13px;border:1px solid #ddcfc0;border-radius:12px;
+  background:#fffaf5;color:var(--dark);margin:9px 0 14px;outline:none;
+}
+input:focus{border-color:#a58a76}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;margin-top:25px}
+.gallery-card{background:var(--paper);padding:12px;border-radius:17px;border:1px solid #eee3d8}
+.gallery-image{background:#eee3d8;border-radius:11px;overflow:hidden;cursor:pointer}
+.gallery-image img{width:100%;display:block}
+.gallery-card h3{font-size:17px;margin:11px 3px 7px}
+.gallery-actions{display:flex;gap:7px;flex-wrap:wrap}
+.empty{text-align:center;padding:65px 20px;background:var(--paper);border-radius:20px;color:#988675}
+.empty p{max-width:350px;margin:10px auto}
+.footer{text-align:center;padding:25px;color:#a08c7b;font-size:12px}
+@media(max-width:760px){
+ .topbar{padding:13px 4%;align-items:flex-start;gap:10px;flex-direction:column}
+ .page{padding:25px 4% 45px}
+ .home-hero{grid-template-columns:1fr}
+ .hero-copy{padding:40px 8% 20px}
+ .hero-art{min-height:300px}
+ .hero-art svg{height:300px}
+ .home-bottom{grid-template-columns:1fr}
+ .dress-layout{grid-template-columns:1fr}
+ .character-panel{position:static}
+ .character-stage{min-height:460px}
+ #character{height:460px}
+ .photo-layout{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">little <span>lookbook</span></div>
+  <nav class="nav">
+    <button onclick="go('home')">Home</button>
+    <button onclick="go('dress')">Dress up</button>
+    <button onclick="go('gallery')">My gallery</button>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="page active">
+  <div class="home-hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Your own little fashion studio</div>
+      <h1>Find your<br><span style="color:#a78672">little look.</span></h1>
+      <p>Create outfits, try new styles, and save your favorite looks in your own personal lookbook.</p>
+      <button class="primary" onclick="go('dress')">Start dressing up</button>
+      <button class="soft-button" onclick="go('gallery')">Open my gallery</button>
+    </div>
+    <div class="hero-art" id="homeCharacter"></div>
+  </div>
+  <div class="home-bottom">
+    <div class="info-card"><h3>01. Create</h3><p>Customize your character and make outfits from your closet.</p></div>
+    <div class="info-card"><h3>02. Capture</h3><p>Take a little picture of your finished look and give it a name.</p></div>
+    <div class="info-card"><h3>03. Collect</h3><p>Keep all your favorite outfits together in your gallery.</p></div>
+  </div>
+</section>
+
+<section id="dress" class="page">
+  <div class="eyebrow">The dressing room</div>
+  <h2>Create a new look</h2>
+  <p>Pick your favorite pieces and make the outfit your own.</p>
+  <div class="dress-layout">
+    <div class="character-panel">
+      <div class="character-stage" id="stage">
+        <svg id="character" viewBox="0 0 360 620" role="img" aria-label="Your fashion character"></svg>
+      </div>
+      <div class="stage-caption">Your character · full outfit view</div>
+      <div class="controls">
+        <button class="small-button" onclick="randomOutfit()">Random outfit</button>
+        <button class="small-button" onclick="resetOutfit()">Reset outfit</button>
+        <button class="small-button" onclick="go('photo')">Save this look</button>
+      </div>
+    </div>
+    <div class="closet">
+      <div class="closet-head">
+        <div><div class="eyebrow">Your wardrobe</div><h2 style="font-size:24px">The closet</h2></div>
+        <button class="small-button" onclick="go('photo')">Save look</button>
+      </div>
+      <div class="tabs" id="tabs"></div>
+      <div id="closetContent"></div>
+    </div>
+  </div>
+</section>
+
+<section id="photo" class="page">
+  <div class="eyebrow">The lookbook studio</div>
+  <h2>Save your character</h2>
+  <p>Give your outfit a name and add it to your gallery.</p>
+  <div class="photo-layout">
+    <div class="photo-card">
+      <div class="photo-frame" id="photoPreview"></div>
+      <p style="font-size:12px;color:#927e6d">Your finished outfit</p>
+    </div>
+    <div class="photo-details">
+      <h2 style="font-size:25px">A new favorite</h2>
+      <label for="lookName">Name your outfit</label>
+      <input id="lookName" maxlength="35" placeholder="e.g. Sunday afternoon">
+      <div class="section-label">Choose a photo background</div>
+      <div class="color-row" id="photoColors"></div>
+      <div class="section-label">Photo frame</div>
+      <div class="color-row" id="frameColors"></div>
+      <button class="primary" onclick="saveLook()">Save to my gallery</button>
+      <button class="soft-button" onclick="go('dress')">Back to dressing room</button>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="page">
+  <div class="eyebrow">Your personal collection</div>
+  <h2>My gallery</h2>
+  <p>All your saved looks, together in one place.</p>
+  <div id="galleryContent"></div>
+</section>
+</main>
+<div class="footer">little lookbook · your own little fashion world</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const categories = {
+  "Hair":["Hair style","Hair color"],
+  "Face":["Skin tone","Eyes","Extras"],
+  "Tops":["Baby tees","Tank tops","T-shirts","Sweaters","Cardigans","Hoodies","Off shoulder"],
+  "Bottoms":["Jeans","Pants","Shorts","Skirts"],
+  "Dresses":["Mini dresses","Maxi dresses","Sundresses","Special dresses"],
+  "Shoes":["Sneakers","Boots","Sandals","Flats"],
+  "Accessories":["Bags","Necklaces","Bracelets","Sunglasses","Hair accessories"],
+  "Background":["Dressing room"]
+};
+
+const items = {
+  "Baby tees":["White baby tee","Pink fitted tee","Striped baby tee","Lace trim tee","Blue graphic tee","Butter yellow tee","Brown fitted tee","Floral baby tee"],
+  "Tank tops":["White ribbed tank","Pink tank","Blue tank","Lace tank","Sage tank","Brown tank","Striped tank"],
+  "T-shirts":["Oversized white tee","Pink oversized tee","Vintage blue tee","Striped tee","Cream tee","Green tee","Graphic tee"],
+  "Sweaters":["Cream knit sweater","Pink sweater","Striped sweater","Mocha sweater","Sage knit","Cable knit"],
+  "Cardigans":["Cream cardigan","Pink cardigan","Blue cardigan","Button-up cardigan","Striped cardigan","Mocha cardigan"],
+  "Hoodies":["Oatmeal hoodie","Pink hoodie","Grey hoodie","Sage hoodie","Zip-up hoodie","Cream oversized hoodie"],
+  "Off shoulder":["Pink off-shoulder","Cream off-shoulder","Striped off-shoulder","Black off-shoulder","Blue off-shoulder"],
+  "Jeans":["Light baggy jeans","Straight blue jeans","Dark denim jeans","Low-rise jeans","Flared jeans","Wide-leg jeans","Cream jeans","Black jeans"],
+  "Pants":["Linen trousers","Grey sweatpants","Cream sweatpants","Brown cargos","Sage cargos","Black leggings","Flared leggings","Khaki trousers"],
+  "Shorts":["Denim shorts","Light denim shorts","White shorts","Athletic shorts","Linen shorts","Pink shorts","Brown shorts"],
+  "Skirts":["Denim mini skirt","Pleated skirt","White flowy skirt","Pink mini skirt","Long linen skirt","Plaid skirt","Sage skirt","Black midi skirt"],
+  "Mini dresses":["Pink mini dress","Floral mini dress","White sundress","Blue mini dress","Knit mini dress","Black simple dress"],
+  "Maxi dresses":["Cream maxi dress","Floral maxi dress","Blue maxi dress","Sage maxi dress","Pink maxi dress"],
+  "Sundresses":["Yellow sundress","White floral dress","Pink sundress","Blue gingham dress","Linen sundress","Green floral dress"],
+  "Special dresses":["Satin party dress","Lace occasion dress","Pink bow dress","Blue evening dress","Floral occasion dress"],
+  "Sneakers":["White sneakers","Pink sneakers","Retro sneakers","Cream trainers","Blue sneakers"],
+  "Boots":["Brown boots","Black boots","Cream boots","Tall boots","Suede ankle boots"],
+  "Sandals":["Simple sandals","Brown sandals","White sandals","Pink sandals","Platform sandals"],
+  "Flats":["Ballet flats","Mary Janes","Cream flats","Brown flats"],
+  "Bags":["Brown shoulder bag","Cream shoulder bag","Pink mini bag","Denim bag","Tote bag","Blue shoulder bag"],
+  "Necklaces":["Gold pendant","Pearl necklace","Heart necklace","Silver chain","Tiny flower necklace"],
+  "Bracelets":["Gold bracelet","Pearl bracelet","Beaded bracelet","Silver bracelet"],
+  "Sunglasses":["Brown sunglasses","Pink sunglasses","Classic black shades","Oval sunglasses"],
+  "Hair accessories":["Pink bow","Cream bow","Blue bow","Flower clip","Headband","Claw clip"],
+  "Dressing room":["Cream studio","Pink studio","Sage studio","Blue studio","Flower studio"]
+};
+
+const colors = {
+  "White":"#f5eee5","Cream":"#e9ddcd","Oat":"#cbb9a6","Mocha":"#927762",
+  "Brown":"#755844","Pink":"#e7c4c2","Dusty pink":"#c99798","Blue":"#a9c4d0",
+  "Sage":"#b5c5ad","Green":"#829a7c","Yellow":"#e8d59d","Black":"#514b49",
+  "Grey":"#aaa9a6","Denim":"#7894aa","Lilac":"#c8b7d4"
+};
+const colorNames=Object.keys(colors);
+const skinTones=["#f7dfc9","#edc6a4","#d9a77f","#bd825e","#925b43","#684332"];
+const hairColors=["#49352e","#79533b","#b17b4b","#d4aa6d","#d9c4a0","#b56c60","#5c5360","#252322"];
+const hairstyles=["Long waves","Straight long","Short bob","Curly hair","High ponytail","Half up"];
+const eyeStyles=["Soft eyes","Round eyes","Closed smile"];
+const backgrounds=["#f8f0e6","#f1dfdf","#e6ebdf","#e1eaf0","#eee4d5"];
+const frameColors=["#fffaf3","#e9d6ce","#dfe6da","#dce6ec","#d6c2ae"];
+
+let outfit={
+ skin:0,hair:0,hairColor:0,eyes:0,faceExtra:"None",
+ top:"White baby tee",bottom:"Light baggy jeans",dress:"",
+ shoes:"White sneakers",bag:"",necklace:"",bracelet:"",
+ sunglasses:"",hairAccessory:"",background:0,
+ photoBg:0,photoFrame:0
+};
+let activeCategory="Hair";
+let activeSub="Hair style";
+
+function clothingColor(name){
+ const n=name.toLowerCase();
+ if(n.includes("pink"))return colors.Pink;
+ if(n.includes("blue"))return colors.Blue;
+ if(n.includes("sage")||n.includes("green"))return colors.Sage;
+ if(n.includes("brown")||n.includes("mocha"))return colors.Brown;
+ if(n.includes("black"))return colors.Black;
+ if(n.includes("yellow"))return colors.Yellow;
+ if(n.includes("grey"))return colors.Grey;
+ if(n.includes("denim")||n.includes("jean"))return colors.Denim;
+ if(n.includes("plaid"))return colors.Mocha;
+ if(n.includes("floral"))return colors["Dusty pink"];
+ if(n.includes("cream")||n.includes("white")||n.includes("linen")||n.includes("oat"))return colors.Cream;
+ return colors.Oat;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function hairBack(){
+ const c=hairColors[outfit.hairColor];
+ const styles=[
+ `<path d="M108 178 Q73 104 112 61 Q150 22 211 48 Q275 73 247 183 L252 284 Q232 310 220 270 L218 155 Q172 198 112 150 L111 267 Q90 294 87 256Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
+ `<path d="M106 170 Q87 51 174 42 Q258 39 252 163 L242 286 Q220 294 220 259 L218 128 Q171 157 112 127 L111 270 Q91 285 87 255Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
+ `<path d="M107 169 Q88 55 174 48 Q251 42 251 157 L243 218 Q218 230 209 200 L150 204 Q123 230 99 208Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
+ `<path d="M104 166 Q73 92 115 55 Q160 17 212 49 Q275 81 246 173 L258 252 Q240 285 224 248 Q216 289 194 260 Q177 292 159 263 Q132 293 120 257 Q88 285 85 246Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
+ `<path d="M109 158 Q85 48 173 43 Q253 42 249 151 L241 264 L221 271 L218 126 Q174 151 111 128Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M193 64 Q228 15 257 47 Q278 80 243 100Z" fill="${c}" stroke="#594238" stroke-width="4"/>`,
+ `<path d="M106 170 Q83 54 172 43 Q253 41 251 155 L240 276 Q218 291 216 250 L216 128 Q170 154 112 128 L111 270 Q91 289 87 253Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M115 70 Q166 8 224 57 Q189 95 115 94Z" fill="${c}" stroke="#594238" stroke-width="3"/>`
+ ];
+ return styles[outfit.hair];
+}
+function topSvg(name){
+ if(!name)return "";
+ let c=clothingColor(name),n=name.toLowerCase();
+ let sleeve=n.includes("sweater")||n.includes("hoodie")||n.includes("cardigan")?true:n.includes("tee")||n.includes("t-shirt")||n.includes("off-shoulder");
+ let neckline=n.includes("tank")||n.includes("off-shoulder")?"M133 231 Q180 250 227 231":"M137 218 Q180 247 223 218";
+ let path=n.includes("hoodie")?
+ `<path d="M140 219 Q180 249 220 219 L238 245 Q260 261 250 306 L239 365 L121 365 L110 306 Q100 261 122 245Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M143 222 Q180 187 217 222 L204 246 Q180 259 156 246Z" fill="none" stroke="#594238" stroke-width="4"/><path d="M177 255 L177 345 M190 255 L190 345" stroke="#8b7565" stroke-width="2"/>`
+ :`<path d="M140 219 Q180 247 220 219 L238 242 Q257 255 249 301 L239 365 L121 365 L111 301 Q103 255 122 242Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="${neckline}" fill="none" stroke="#594238" stroke-width="4"/>`;
+ if(sleeve)path+=`<path d="M125 240 Q104 238 103 270 L112 301 L130 292 L136 258Z M235 240 Q256 238 257 270 L248 301 L230 292 L224 258Z" fill="${c}" stroke="#594238" stroke-width="4"/>`;
+ if(n.includes("lace"))path+=`<path d="M128 354 Q180 363 232 354" stroke="#fffaf3" stroke-width="5" stroke-dasharray="3 4" fill="none"/>`;
+ if(n.includes("stripe"))path+=`<path d="M117 278 Q180 290 244 278 M115 309 Q180 321 245 309 M119 339 Q180 350 241 339" stroke="#fffaf3" stroke-width="5" opacity=".8" fill="none"/>`;
+ if(n.includes("cardigan"))path+=`<path d="M180 245 L180 365 M166 273 L166 279 M166 301 L166 307 M166 329 L166 335" stroke="#806452" stroke-width="2" fill="none"/>`;
+ return path;
+}
+function bottomSvg(name){
+ if(!name)return "";
+ let c=clothingColor(name),n=name.toLowerCase();
+ if(n.includes("skirt")){
+  let shape=n.includes("flowy")||n.includes("long")||n.includes("midi")?
+  "M130 355 Q180 370 230 355 L260 520 Q180 540 100 520Z":
+  "M130 355 Q180 369 230 355 L247 453 Q180 470 113 453Z";
+  return `<path d="${shape}" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 367 L180 515 M143 372 L151 507 M215 372 L207 507" stroke="#fffaf3" opacity=".4" stroke-width="3"/>`;
+ }
+ let shorts=n.includes("shorts");
+ if(shorts)return `<path d="M123 354 Q180 370 237 354 L232 440 L185 440 L180 405 L172 440 L128 440Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 370 L180 408" stroke="#594238" stroke-width="3"/>`;
+ let flare=n.includes("flared");
+ let baggy=n.includes("baggy")||n.includes("wide")||n.includes("cargo");
+ return `<path d="M125 354 Q180 367 235 354 L225 ${flare?510:495} L${flare?240:216} 570 L181 570 L179 415 L170 570 L${flare?120:144} 570 L${flare?138:135} ${flare?510:495}Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M180 369 L180 416" stroke="#594238" stroke-width="3"/><path d="M${baggy?139:151} 380 L${baggy?147:156} 480 M220 380 L212 480" stroke="#fffaf3" stroke-width="3" opacity=".4"/>`;
+}
+function dressSvg(name){
+ if(!name)return "";
+ let c=clothingColor(name),n=name.toLowerCase();
+ let long=n.includes("maxi");
+ return `<path d="M140 219 Q180 247 220 219 L239 246 Q253 262 246 305 L${long?270:247} ${long?535:470} Q180 ${long?555:482} ${long?90:113} ${long?535:470} L114 305 Q107 262 121 246Z" fill="${c}" stroke="#594238" stroke-width="4"/><path d="M140 220 Q180 247 220 220" fill="none" stroke="#594238" stroke-width="4"/><path d="M180 251 L180 ${long?535:470}" stroke="#fffaf3" stroke-width="3" opacity=".5"/>${n.includes("floral")?'<g fill="#fffaf3"><circle cx="145" cy="315" r="7"/><circle cx="210" cy="380" r="8"/><circle cx="156" cy="440" r="7"/><circle cx="217" cy="290" r="6"/></g>':""}`;
+}
+function characterSVG(){
+ const skin=skinTones[outfit.skin];
+ const eyes=outfit.eyes===2?
+ `<path d="M143 155 Q153 165 163 155 M197 155 Q207 165 217 155" stroke="#594238" stroke-width="3" fill="none" stroke-linecap="round"/>`:
+ `<g fill="#594238"><ellipse cx="154" cy="156" rx="4" ry="6"/><ellipse cx="206" cy="156" rx="4" ry="6"/></g>`;
+ const hair=hairBack();
+ const shoes=outfit.shoes?`<g stroke="#594238" stroke-width="4"><path d="M125 563 Q148 554 170 563 L169 588 Q144 599 113 585 Q110 573 125 563Z" fill="${clothingColor(outfit.shoes)}"/><path d="M190 563 Q212 554 235 563 Q250 573 247 585 Q216 599 191 588Z" fill="${clothingColor(outfit.shoes)}"/><path d="M116 581 Q143 592 169 583 M191 583 Q220 592 247 581" fill="none"/></g>`:"";
+ const faceExtra=outfit.faceExtra==="Freckles"?`<g fill="#a66f56"><circle cx="137" cy="171" r="2"/><circle cx="145" cy="176" r="2"/><circle cx="220" cy="171" r="2"/><circle cx="212" cy="176" r="2"/></g>`:"";
+ const hairFront=outfit.hair===2?
+ `<path d="M108 132 Q112 42 177 45 Q239 44 249 133 Q216 99 180 108 Q141 94 108 132Z" fill="${hairColors[outfit.hairColor]}" stroke="#594238" stroke-width="4"/>`:
+ `<path d="M110 132 Q114 46 177 45 Q239 44 249 132 Q218 102 180 111 Q143 101 110 132Z" fill="${hairColors[outfit.hairColor]}" stroke="#594238" stroke-width="4"/>`;
+ let outfitTop=outfit.dress?dressSvg(outfit.dress):topSvg(outfit.top);
+ let outfitBottom=outfit.dress?"":bottomSvg(outfit.bottom);
+ let bag=outfit.bag?`<g stroke="#594238" stroke-width="3"><path d="M235 282 Q270 270 275 306 L273 358 L238 358Z" fill="${clothingColor(outfit.bag)}"/><path d="M242 289 Q242 258 260 258 Q278 258 274 290" fill="none"/></g>`:"";
+ let necklace=outfit.necklace?`<path d="M145 224 Q180 273 215 224" fill="none" stroke="#b18a53" stroke-width="3"/><circle cx="180" cy="263" r="5" fill="#c6a46e"/>`:"";
+ let bow=outfit.hairAccessory?`<g transform="translate(225 78)" stroke="#594238" stroke-width="2"><path d="M0 0 Q-31 -29 -29 1 Q-23 19 0 5 Q23 19 29 1 Q31 -29 0 0Z" fill="${clothingColor(outfit.hairAccessory)}"/><circle r="5" fill="#b18a76"/></g>`:"";
+ let glasses=outfit.sunglasses?`<g fill="none" stroke="#594238" stroke-width="3"><rect x="132" y="145" width="39" height="23" rx="9"/><rect x="189" y="145" width="39" height="23" rx="9"/><path d="M171 153 L189 153"/></g>`:"";
+ let bracelet=outfit.bracelet?`<ellipse cx="119" cy="302" rx="8" ry="5" fill="none" stroke="#b18a53" stroke-width="3"/>`:"";
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 620">
+ <ellipse cx="180" cy="592" rx="95" ry="12" fill="#9c806b" opacity=".12"/>
+ ${hair}
+ <path d="M148 190 L146 221 L130 241 L119 305 L133 316 L149 268 L153 226 L207 226 L211 268 L227 316 L241 305 L230 241 L214 221 L212 190Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
+ <path d="M148 190 Q180 210 212 190 L216 220 Q180 245 144 220Z" fill="${skin}" stroke="#594238" stroke-width="3"/>
+ <path d="M147 354 Q180 368 213 354 L210 420 L205 563 L175 563 L169 420 L155 563 L124 563 L137 420Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
+ ${outfitBottom}
+ ${outfitTop}
+ ${shoes}
+ <path d="M145 127 Q180 99 215 127 L224 165 Q219 207 180 214 Q141 207 136 165Z" fill="${skin}" stroke="#594238" stroke-width="4"/>
+ ${eyes}
+ <path d="M169 181 Q180 188 191 181" fill="none" stroke="#a66f56" stroke-width="2.5" stroke-linecap="round"/>
+ <ellipse cx="137" cy="176" rx="8" ry="5" fill="#d98f86" opacity=".3"/><ellipse cx="223" cy="176" rx="8" ry="5" fill="#d98f86" opacity=".3"/>
+ ${faceExtra}${hairFront}${glasses}${necklace}${bag}${bracelet}${bow}
+ </svg>`;
+}
+function renderCharacter(){
+ $("character").outerHTML=characterSVG().replace("<svg ","<svg id='character' ");
+ $("homeCharacter").innerHTML=characterSVG();
+}
+function go(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ $(page).classList.add("active");
+ if(page==="photo")renderPhoto();
+ if(page==="gallery")renderGallery();
+ if(page==="dress"){renderCloset();renderCharacter();}
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderTabs(){
+ $("tabs").innerHTML=Object.keys(categories).map(cat=>
+ `<button class="tab ${cat===activeCategory?"selected":""}" onclick="chooseCategory('${cat}')">${cat}</button>`
+ ).join("");
+}
+function chooseCategory(cat){
+ activeCategory=cat;
+ activeSub=categories[cat][0];
+ renderCloset();
+}
+function chooseSub(sub){
+ activeSub=sub;
+ renderCloset();
+}
+function currentOptions(){
+ if(activeCategory==="Hair")return activeSub==="Hair style"?hairstyles:hairColors.map((c,i)=>"Hair shade "+(i+1));
+ if(activeCategory==="Face"){
+  if(activeSub==="Skin tone")return skinTones.map((c,i)=>"Skin shade "+(i+1));
+  if(activeSub==="Eyes")return eyeStyles;
+  return ["None","Freckles"];
+ }
+ return items[activeSub]||[];
+}
+function selectedItem(name){
+ if(activeCategory==="Hair")return activeSub==="Hair style"?outfit.hair===hairstyles.indexOf(name):outfit.hairColor===hairColors.indexOf(name);
+ if(activeCategory==="Face"){
+  if(activeSub==="Skin tone")return outfit.skin===skinTones.indexOf(skinTones[Number(name.split(" ").pop())-1]);
+  if(activeSub==="Eyes")return outfit.eyes===eyeStyles.indexOf(name);
+  return outfit.faceExtra===name;
+ }
+ const map={
+  "Tops": "top","Bottoms":"bottom","Dresses":"dress","Sneakers":"shoes","Boots":"shoes","Sandals":"shoes","Flats":"shoes",
+  "Bags":"bag","Necklaces":"necklace","Bracelets":"bracelet","Sunglasses":"sunglasses","Hair accessories":"hairAccessory"
+ };
+ if(activeCategory==="Background")return outfit.background===items["Dressing room"].indexOf(name);
+ return outfit[map[activeSub]||""]===name;
+}
+function selectItem(name){
+ if(activeCategory==="Hair"){
+  if(activeSub==="Hair style")outfit.hair=hairstyles.indexOf(name);
+  else outfit.hairColor=hairColors.indexOf(name);
+ }else if(activeCategory==="Face"){
+  if(activeSub==="Skin tone")outfit.skin=skinTones.indexOf(skinTones[Number(name.split(" ").pop())-1]);
+  else if(activeSub==="Eyes")outfit.eyes=eyeStyles.indexOf(name);
+  else outfit.faceExtra=name;
+ }else if(activeCategory==="Background")outfit.background=items["Dressing room"].indexOf(name);
+ else if(activeSub==="Dresses"){
+  outfit.dress=name;outfit.top="";outfit.bottom="";
+ }else if(activeCategory==="Tops"){
+  outfit.dress="";outfit.top=name;
+ }else if(activeCategory==="Bottoms"){
+  outfit.dress="";outfit.bottom=name;
+ }else if(["Sneakers","Boots","Sandals","Flats"].includes(activeSub))outfit.shoes=name;
+ else if(activeSub==="Bags")outfit.bag=outfit.bag===name?"":name;
+ else if(activeSub==="Necklaces")outfit.necklace=outfit.necklace===name?"":name;
+ else if(activeSub==="Bracelets")outfit.bracelet=outfit.bracelet===name?"":name;
+ else if(activeSub==="Sunglasses")outfit.sunglasses=outfit.sunglasses===name?"":name;
+ else if(activeSub==="Hair accessories")outfit.hairAccessory=outfit.hairAccessory===name?"":name;
+ renderCloset();renderCharacter();
+}
+function renderCloset(){
+ renderTabs();
+ const subs=categories[activeCategory];
+ let html=`<div class="tabs">${subs.map(s=>`<button class="tab ${s===activeSub?"selected":""}" onclick="chooseSub('${s}')">${s}</button>`).join("")}</div>`;
+ let opts=currentOptions();
+ html+=`<div class="section-label">${activeSub}</div><div class="item-grid">`;
+ opts.forEach((name,i)=>{
+  let color=activeCategory==="Hair"&&activeSub==="Hair color"?hairColors[i]:
+    activeCategory==="Hair"&&activeSub==="Hair style"?hairColors[outfit.hairColor]:
+    activeCategory==="Face"&&activeSub==="Skin tone"?skinTones[i]:
+    activeCategory==="Background"?backgrounds[i]:clothingColor(name);
+  html+=`<button class="item ${selectedItem(name)?"chosen":""}" onclick="selectItem('${name.replace(/'/g,"\\'")}')"><div class="item-swatch" style="background:${color}"></div>${name}</button>`;
+ });
+ html+="</div>";
+ if(activeCategory==="Tops"||activeCategory==="Bottoms"){
+  html+=`<p style="font-size:12px;color:#998675">Choose a dress instead to replace both your top and bottom.</p>`;
+ }
+ $("closetContent").innerHTML=html;
+}
+function randomOutfit(){
+ const pick=a=>a[Math.floor(Math.random()*a.length)];
+ outfit.hair=Math.floor(Math.random()*hairstyles.length);
+ outfit.hairColor=Math.floor(Math.random()*hairColors.length);
+ outfit.skin=Math.floor(Math.random()*skinTones.length);
+ outfit.eyes=Math.floor(Math.random()*eyeStyles.length);
+ outfit.dress="";
+ outfit.top=pick(items["Baby tees"].concat(items["Tank tops"],items["Sweaters"],items["Cardigans"]));
+ outfit.bottom=pick(items["Jeans"].concat(items["Pants"],items["Shorts"],items["Skirts"]));
+ if(Math.random()<.3){outfit.dress=pick(items["Mini dresses"].concat(items["Sundresses"],items["Maxi dresses"]));outfit.top="";outfit.bottom="";}
+ outfit.shoes=pick(items["Sneakers"].concat(items["Boots"],items["Sandals"]));
+ outfit.bag=pick(items["Bags"]);
+ outfit.necklace=pick(items["Necklaces"]);
+ outfit.bracelet="";outfit.sunglasses="";outfit.hairAccessory="";
+ renderCloset();renderCharacter();
+}
+function resetOutfit(){
+ outfit={skin:0,hair:0,hairColor:0,eyes:0,faceExtra:"None",top:"White baby tee",bottom:"Light baggy jeans",dress:"",shoes:"White sneakers",bag:"",necklace:"",bracelet:"",sunglasses:"",hairAccessory:"",background:0,photoBg:0,photoFrame:0};
+ renderCloset();renderCharacter();
+}
+function renderPhoto(){
+ $("photoPreview").innerHTML=characterSVG().replace("<svg ","<svg style='background:"+backgrounds[outfit.photoBg]+"' ");
+ $("photoColors").innerHTML=backgrounds.map((c,i)=>`<button aria-label="Background ${i+1}" class="color-dot ${outfit.photoBg===i?"selected":""}" style="background:${c}" onclick="outfit.photoBg=${i};renderPhoto()"></button>`).join("");
+ $("frameColors").innerHTML=frameColors.map((c,i)=>`<button aria-label="Frame ${i+1}" class="color-dot ${outfit.photoFrame===i?"selected":""}" style="background:${c}" onclick="outfit.photoFrame=${i};renderPhoto()"></button>`).join("");
+ $("photoPreview").style.borderColor=frameColors[outfit.photoFrame];
+ $("photoPreview").style.background=backgrounds[outfit.photoBg];
+}
+function saveLook(){
+ const name=$("lookName").value.trim()||"My new look";
+ const svg=characterSVG().replace("<svg ","<svg style='background:"+backgrounds[outfit.photoBg]+"' ");
+ const data="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);
+ let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
+ gallery.unshift({id:Date.now(),name,svg:data,frame:frameColors[outfit.photoFrame],outfit:{...outfit}});
+ try{
+  localStorage.setItem("littleLookbookGallery",JSON.stringify(gallery));
+  $("lookName").value="";
+  go("gallery");
+ }catch(e){
+  alert("Your gallery is full. Try deleting an older saved look and then save again.");
+ }
+}
+function renderGallery(){
+ let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
+ if(!gallery.length){
+  $("galleryContent").innerHTML=`<div class="empty"><h2>Your gallery is waiting</h2><p>Once you save your first outfit, it will show up here. Start creating your first look!</p><button class="primary" onclick="go('dress')">Create a look</button></div>`;
+  return;
+ }
+ $("galleryContent").innerHTML=`<div class="gallery-grid">${gallery.map(item=>`
+ <div class="gallery-card">
+  <div class="gallery-image" onclick="viewLook(${item.id})"><img src="${item.svg}" alt="${esc(item.name)}"></div>
+  <h3>${esc(item.name)}</h3>
+  <div class="gallery-actions">
+   <button class="small-button" onclick="editLook(${item.id})">Edit outfit</button>
+   <button class="small-button" onclick="viewLook(${item.id})">View</button>
+   <button class="small-button" onclick="deleteLook(${item.id})">Delete</button>
+  </div>
+ </div>`).join("")}</div>`;
+}
+function editLook(id){
+ let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
+ let item=gallery.find(x=>x.id===id);
+ if(!item)return;
+ outfit={...item.outfit};
+ go("dress");
+}
+function viewLook(id){
+ let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
+ let item=gallery.find(x=>x.id===id);
+ if(!item)return;
+ const win=window.open("","_blank");
+ if(!win){alert("Allow pop-ups to open a saved picture.");return;}
+ win.document.write(`<title>${esc(item.name)}</title><body style="margin:0;background:#f7f1e8;display:grid;place-items:center;min-height:100vh;font-family:Georgia;color:#554638"><div style="text-align:center"><h2>${esc(item.name)}</h2><img src="${item.svg}" style="height:75vh;max-width:90vw;background:#fffaf3;border:14px solid ${item.frame}"><p>Little Lookbook</p></div></body>`);
+ win.document.close();
+}
+function deleteLook(id){
+ if(!confirm("Delete this saved look?"))return;
+ let gallery=JSON.parse(localStorage.getItem("littleLookbookGallery")||"[]");
+ gallery=gallery.filter(x=>x.id!==id);
+ localStorage.setItem("littleLookbookGallery",JSON.stringify(gallery));
+ renderGallery();
+}
+function init(){
+ renderCharacter();
+ $("homeCharacter").innerHTML=characterSVG();
+ renderTabs();renderCloset();
+}
+init();
+</script>
+</body>
+</html>
